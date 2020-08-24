@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ec5757</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="noti_bg_color">#f7f1f4</color>
+    <color name="play_back_color">#5854a3</color>
+    <color name="progress_color">#bae2fe</color>
+    <color name="category_text_color">#fdda8a</color>
+    <color name="window_background_color">#fafafa</color>
+    <color name="text_color_primary">#0a0a0a</color>
+    <color name="text_color_secondary">#252525</color>
+    <color name="text_color_tenary">#979797</color>
+
+    <color name="empty_view_btn_color">#b5dbf7</color>
+    <color name="category_3_color">#e8d1e5</color>
+    <color name="category_2_color">#cee6e7</color>
+
+</resources>

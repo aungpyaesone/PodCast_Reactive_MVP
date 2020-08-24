@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name_dev">PodCast_Reactive_MVP(dev)</string>
+    <string name="app_name_prod">PodCast_Reactive_MVP(prod)</string>
+    <string name="app_name_stag">PodCast_Reactive_MVP(stag)</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="podcast">PodCast</string>
+    <string name="pre_mins">15</string>
+    <string name="test_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type </string>
+    <string name="art_design"><![CDATA[ART & DESIGN]]></string>
+    <string name="category_title">Women n Tech Podcast, hosted by Espree Devora</string>
+    <string name="episode_title">How to Influence with Tactical Empathy</string>
+    <string name="categories">Categories</string>
+    <string name="your_shows">Your Shows</string>
+    <string name="title">Designing for everyone, everywhere with Yosef P.</string>
+    <string name="welcome">Welcome</string>
+    <string name="des">It took like you are not enrolled in nay podcasts,but it\'s easy to get stated</string>
+    <string name="find_something_new">Find something new</string>
+</resources>

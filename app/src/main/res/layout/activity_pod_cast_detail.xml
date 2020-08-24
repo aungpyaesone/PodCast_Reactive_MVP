@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.postcast_reactive_mvp.activities.PodCastDetailActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.example.postcast_reactive_mvp.views.components.RoundedCornerImageView
+            android:id="@+id/ivPoster"
+            android:layout_width="match_parent"
+            android:layout_height="146dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:src="@drawable/podcast"
+            app:cornerRadius="@dimen/margin_large" />
+
+        <TextView
+            android:id="@+id/tvCategoriesType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/ivPoster"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:background="@drawable/category_bg"
+            android:paddingStart="@dimen/margin_medium_2"
+            android:paddingTop="@dimen/margin_medium"
+            android:paddingEnd="@dimen/margin_medium_2"
+            android:paddingBottom="@dimen/margin_medium"
+            android:text="@string/art_design"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/podCastTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvCategoriesType"
+            android:layout_margin="@dimen/margin_large"
+            android:text="@string/title"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_heading_1x" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            style="@style/detailIconStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/podCastTitle"
+            android:layout_alignStart="@id/podCastTitle"
+            android:drawableLeft="@drawable/ic_baseline_access_time_24"
+            android:text="12m" />
+
+        <TextView
+            android:id="@+id/tvSecond"
+            style="@style/detailIconStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tvTime"
+            android:layout_marginStart="@dimen/margin_medium_2"
+            android:layout_toEndOf="@id/tvTime"
+            android:drawableLeft="@drawable/ic_baseline_sports_baseball_24"
+            android:text="88" />
+
+        <TextView
+            android:id="@+id/tvThird"
+            style="@style/detailIconStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tvTime"
+            android:layout_marginStart="@dimen/margin_medium_2"
+            android:layout_toEndOf="@id/tvSecond"
+            android:drawableLeft="@drawable/ic_baseline_sms_24"
+            android:text="10" />
+
+        <View
+            android:id="@+id/viewOne"
+            android:layout_width="@dimen/margin_medium"
+            android:layout_height="@dimen/margin_medium"
+            android:layout_alignTop="@id/tvThird"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_toStartOf="@id/viewTwo"
+            android:background="@drawable/black_point" />
+
+        <View
+            android:id="@+id/viewTwo"
+            android:layout_width="@dimen/margin_medium"
+            android:layout_height="@dimen/margin_medium"
+            android:layout_alignTop="@id/tvThird"
+            android:layout_alignEnd="@id/podCastTitle"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:background="@drawable/black_point" />
+
+        <View
+            android:id="@+id/dividerView"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/tvTime"
+            android:layout_alignStart="@id/tvTime"
+            android:layout_alignEnd="@id/viewTwo"
+            android:layout_marginTop="@dimen/margin_xlarge"
+            android:background="#FAFAFA" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dividerView"
+            android:layout_alignStart="@id/tvTime"
+            android:layout_alignEnd="@id/viewTwo"
+            android:lineSpacingMultiplier="1.5"
+            android:text="@string/test_text" />
+
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/mediaPlayBackSmallViewPod"
+        layout="@layout/media_play_back_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

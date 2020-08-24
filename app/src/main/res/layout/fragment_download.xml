@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.DownloadFragment">
+
+ <RelativeLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+     <RelativeLayout
+         android:id="@+id/rOne"
+         android:layout_width="match_parent"
+         android:layout_height="?attr/actionBarSize"
+         android:layout_marginEnd="@dimen/margin_medium_2"
+         >
+         <ImageView
+             android:id="@+id/ivBack"
+             android:layout_width="wrap_content"
+             android:layout_height="match_parent"
+             android:layout_marginStart="@dimen/margin_medium_2"
+             android:src="@drawable/ic_baseline_arrow_back_ios_24"/>
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="match_parent"
+             android:gravity="center"
+             android:layout_marginStart="@dimen/margin_medium_2"
+             android:textSize="@dimen/text_heading_1x"
+             android:text="@string/your_shows"
+             android:textColor="@android:color/black"
+             android:layout_toEndOf="@id/ivBack"/>
+
+         <View
+             android:id="@+id/viewOne"
+             android:layout_width="@dimen/margin_medium"
+             android:layout_height="@dimen/margin_medium"
+             android:background="@drawable/black_point"
+             android:layout_toStartOf="@id/viewTwo"
+             android:layout_marginEnd="@dimen/margin_medium_2"
+             android:layout_centerVertical="true"
+             />
+         <View
+             android:id="@+id/viewTwo"
+             android:layout_margin="@dimen/margin_small"
+             android:layout_width="@dimen/margin_medium"
+             android:layout_height="@dimen/margin_medium"
+             android:background="@drawable/black_point"
+             android:layout_alignParentEnd="true"
+             android:layout_centerVertical="true"
+             android:layout_marginEnd="@dimen/margin_medium"
+             />
+
+
+     </RelativeLayout>
+
+        <com.example.postcast_reactive_mvp.views.components.SmartRecyclerView
+            android:id="@+id/rvDownloadedList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rOne"
+            tools:listitem="@layout/downloaed_item_view"/>
+
+     <include
+         android:id="@+id/emptyViewPod"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         layout="@layout/empty_view_pod"/>
+
+ </RelativeLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

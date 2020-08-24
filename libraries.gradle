@@ -1,0 +1,85 @@
+ext{
+    glideVersion = "4.11.0"
+    ktxVersion = "1.1.0"
+    appCompactVerstion = "1.1.0"
+    constraintLayoutVersion = "1.1.3"
+    room_version = "2.2.3"
+    lifecycle_version = "2.2.0"
+    rxVersion ="2.1.1"
+    retrofitVersion = "2.6.1"
+    rxKotlinVersion = "2.x-SNAPSHOT"
+    swipeRefreshVersion = "1.1.0"
+    okhttpVersion = "4.1.0"
+    materialVersion = "1.3.0-alpha01"
+    workmanagerVersion = "2.3.1"
+    smartiestVersion = "1.3.9-appcompat"
+    youtubeplayerVersion = "10.0.5"
+
+    junitVersion = "4.12"
+    junitKtxVersion = "1.1.1"
+    junitTestCoreVersion = "1.2.0"
+    robolectricVersion = "4.3.1"
+    mockKVersion = "1.10.0"
+    mockitoVersion = "3.1.0"
+    extJunitKtxVersion = "1.1.1"
+    espressoVersion = "3.2.0"
+    testRuleVersion = "1.2.0"
+    testRunnerVersion = "1.2.0"
+    testKtxCoreVersion = "1.2.0"
+    expressocontribVersion = "3.2.0"
+    mokitoVersion = "3.1.0"
+    extJunitVersion = "1.1.1"
+   // androidTestImplementation "androidx.test.ext:junit-ktx:1.1.1"
+
+
+    libraries = [
+            glide : "com.github.bumptech.glide:glide:$glideVersion",
+            glideAnotationProcessor: "com.github.bumptech.glide:compiler:$glideVersion",
+            ktx : "androidx.core:core-ktx:$ktxVersion",
+            appCompact : "androidx.appcompat:appcompat:$appCompactVerstion",
+            constraintLayout : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+
+            room : "androidx.room:room-runtime:$room_version",
+            roomKapt : "androidx.room:room-compiler:$room_version",
+
+            liveData : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
+            lifecycleComponent :"android.arch.lifecycle:extensions:$lifecycle_version",
+            lifecycleKapt : "androidx.lifecycle:lifecycle-compiler:$lifecycle_version",
+            lifecyleArcKapt :"android.arch.lifecycle:compiler:$lifecycle_version",
+
+            rxAndroid : "io.reactivex.rxjava2:rxandroid:$rxVersion",
+
+            retrofit : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retorfitAdapter : "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion",
+            retrofitGsonConverter : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+
+            rxKotlin : "com.github.ReactiveX:RxKotlin:$rxKotlinVersion",
+            rxIoReactive : "io.reactivex.rxjava2:rxandroid:$rxVersion",
+
+            swipeRefresh :"androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshVersion",
+
+            okhttp : "com.squareup.okhttp3:okhttp:$okhttpVersion",
+            material : "com.google.android.material:material:$materialVersion",
+            workmanager: "androidx.work:work-runtime:$workmanagerVersion",
+            smartiest : "com.github.smarteist:autoimageslider:$smartiestVersion",
+
+            junit : "junit:junit:$junitVersion",
+            junitKtx : "androidx.test.ext:junit-ktx:$junitKtxVersion",
+            juniTextCore : "androidx.test:core-ktx:$junitTestCoreVersion",
+
+            robolectric : "org.robolectric:robolectric:$robolectricVersion",
+            mockK : "io.mockk:mockk:$mockKVersion",
+            mockito : "org.mockito:mockito-core:$mockitoVersion",
+            extJunitTest : "androidx.test.ext:junit-ktx:$extJunitKtxVersion",
+
+            espresso : "androidx.test.espresso:espresso-core:$espressoVersion",
+            testRule : "androidx.test:rules:$testRuleVersion",
+            testRunner : "androidx.test:runner:$testRunnerVersion",
+            testCoreKtx : "androidx.test:core-ktx:$testKtxCoreVersion",
+            espressoContrib : "com.android.support.test.espresso:espresso-contrib:$expressocontribVersion",
+            androidmokito : "org.mockito:mockito-android:$mokitoVersion",
+            extJunit : "androidx.test.ext:junit:$extJunitVersion",
+            youtubeplayer : "com.pierfrancescosoffritti.androidyoutubeplayer:core:$youtubeplayerVersion"
+
+    ]
+}

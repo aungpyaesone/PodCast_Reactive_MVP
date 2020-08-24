@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.postcast_reactive_mvp.views.viewpods.EmptyViewPod xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/margin_medium_2"
+        app:contentPadding="@dimen/margin_medium_2"
+        app:cardElevation="@dimen/margin_medium"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivPoster"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_xxlarge"
+                android:scaleType="centerCrop"
+                android:src="@drawable/podcast" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivPoster"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_large"
+                android:text="@string/welcome"
+                android:textColor="@color/text_color_primary"
+                android:textSize="@dimen/text_heading_1x" />
+
+            <TextView
+                android:id="@+id/tvMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvTitle"
+                android:layout_marginStart="@dimen/margin_xxlarge"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginEnd="@dimen/margin_xxlarge"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.3"
+                android:text="@string/des"
+                android:textColor="@color/text_color_secondary"
+                android:textSize="@dimen/text_regular_2x" />
+
+            <Button
+                android:id="@+id/btnFind"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height"
+                android:layout_below="@id/tvMessage"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_medium_2"
+                android:backgroundTint="@color/empty_view_btn_color"
+                android:text="@string/find_something_new"
+                android:textColor="@color/text_color_primary" />
+
+            <Button
+                android:id="@+id/btnReload"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height"
+                android:layout_below="@id/btnFind"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_medium_2"
+                android:backgroundTint="@color/category_text_color"
+                android:text="@string/find_something_new"
+                android:textColor="@color/text_color_primary" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</com.example.postcast_reactive_mvp.views.viewpods.EmptyViewPod>

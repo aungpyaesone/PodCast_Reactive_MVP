@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.SearchFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <com.example.postcast_reactive_mvp.views.components.RoundedCornerImageView
+                android:id="@+id/ivEpisode"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_margin="@dimen/margin_medium_2"
+                app:cornerRadius="@dimen/margin_large"
+                android:src="@drawable/podcast"
+                android:scaleType="centerCrop"
+                />
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xxlarge"
+                android:textSize="@dimen/text_heading_2x"
+                android:layout_alignStart="@id/ivEpisode"
+                android:layout_alignEnd="@id/ivEpisode"
+                android:textColor="@android:color/white"
+                android:padding="@dimen/margin_large"
+                android:gravity="center"
+                android:text="@string/episode_title"/>
+
+
+
+    <TextView
+        android:id="@+id/tvCategories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/categories"
+        android:layout_below="@id/ivEpisode"
+        android:layout_marginStart="@dimen/margin_medium_2"
+        android:textSize="@dimen/text_heading_1x"
+        android:textColor="@android:color/black"
+        />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCategories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:layout_below="@id/tvCategories"
+            tools:listitem="@layout/categories_item_view"
+            />
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
