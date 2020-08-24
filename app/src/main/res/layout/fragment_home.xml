@@ -119,7 +119,7 @@
                     android:layout_height="@dimen/margin_medium"
                     android:background="@drawable/black_point"
                     android:layout_toStartOf="@id/viewTwo"
-                    android:layout_marginEnd="@dimen/margin_medium_2"
+                    android:layout_marginEnd="@dimen/margin_small"
                     android:layout_centerVertical="true"
                     />
                 <View

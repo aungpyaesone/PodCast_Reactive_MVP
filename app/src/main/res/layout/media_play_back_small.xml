@@ -25,7 +25,7 @@
             android:progressBackgroundTint="@android:color/white"
             android:progressTint="@color/progress_color"
             app:layout_constraintBottom_toBottomOf="@+id/ivPodcast"
-            app:layout_constraintEnd_toEndOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="@+id/tvForward"
             app:layout_constraintStart_toEndOf="@+id/tvStartTime"
             app:layout_constraintTop_toTopOf="@+id/tvStartTime" />
 
@@ -38,12 +38,12 @@
             android:layout_marginBottom="@dimen/margin_medium_2"
             android:text="1x"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintEnd_toStartOf="@+id/tvBackward"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvStartTime" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tvBackward"
             style="@style/playBackText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,24 +67,24 @@
             android:padding="@dimen/margin_medium"
             android:src="@drawable/ic_baseline_play_arrow_24"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView2"
+            app:layout_constraintEnd_toStartOf="@+id/tvForward"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintStart_toEndOf="@+id/tvBackward"
             app:layout_constraintTop_toBottomOf="@+id/progressBar"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tvForward"
             style="@style/playBackText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/tvPlaySpeed"
             android:text="@string/pre_mins"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintBottom_toBottomOf="@+id/tvBackward"
             app:layout_constraintEnd_toStartOf="@+id/textView3"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/textView" />
+            app:layout_constraintTop_toTopOf="@+id/tvBackward" />
 
         <TextView
             android:id="@+id/textView3"
@@ -94,11 +94,11 @@
             android:layout_toEndOf="@id/tvPlaySpeed"
             android:text="Zz"
             android:textSize="@dimen/text_regular_3x"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintBottom_toBottomOf="@+id/tvBackward"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="@+id/textView" />
+            app:layout_constraintStart_toEndOf="@+id/tvForward"
+            app:layout_constraintTop_toTopOf="@+id/tvBackward" />
 
         <TextView
             android:id="@+id/tvEndTime"

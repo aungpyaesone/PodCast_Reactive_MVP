@@ -39,7 +39,7 @@
              android:layout_height="@dimen/margin_medium"
              android:background="@drawable/black_point"
              android:layout_toStartOf="@id/viewTwo"
-             android:layout_marginEnd="@dimen/margin_medium_2"
+             android:layout_marginEnd="@dimen/margin_small"
              android:layout_centerVertical="true"
              />
          <View
@@ -67,6 +67,7 @@
          android:id="@+id/emptyViewPod"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
+         android:layout_below="@id/rOne"
          layout="@layout/empty_view_pod"/>
 
  </RelativeLayout>
