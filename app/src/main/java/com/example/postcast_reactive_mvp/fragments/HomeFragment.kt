@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.postcast_reactive_mvp.R
 import com.example.postcast_reactive_mvp.activities.PodCastDetailActivity
 import com.example.postcast_reactive_mvp.adapters.LatestPodCastListAdapter
+import com.example.postcast_reactive_mvp.data.vos.PodCastVO
 import com.example.postcast_reactive_mvp.mvp.presenters.HomePresenter
 import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.HomePresenterImpl
 import com.example.postcast_reactive_mvp.mvp.views.HomeView
@@ -55,12 +56,7 @@ class HomeFragment : BaseFragment(),HomeView{
         setUpViewPod()
         setUpRecycler()
         mPresenter.onUiReady()
-        requestData()
-    }
 
-    private fun requestData() {
-        val list = arrayListOf<String>()
-        mAdapter.setData(list)
     }
 
     private fun setUpPresenter(){
@@ -95,16 +91,14 @@ class HomeFragment : BaseFragment(),HomeView{
             }
     }
 
-    override fun showLatestPodCastList(latestPodCastVO: String) {
-
+    override fun showLatestPodCastList(latestPodCastVO: List<PodCastVO>) {
+        mAdapter.setData(latestPodCastVO)
     }
 
     override fun navigateToDetailActivity() {
        startActivity(activity?.let { PodCastDetailActivity.newIntent(it) })
-
     }
 
     override fun showErrorMessage(error: String) {
-
     }
 }
