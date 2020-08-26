@@ -109,6 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/dividerView"
             android:layout_alignStart="@id/tvTime"
+            android:layout_marginTop="@dimen/margin_medium_2"
             android:layout_alignEnd="@id/viewTwo"
             android:lineSpacingMultiplier="1.5"
             android:text="@string/test_text" />

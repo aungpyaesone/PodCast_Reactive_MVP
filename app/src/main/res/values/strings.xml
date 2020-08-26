@@ -16,4 +16,6 @@
     <string name="welcome">Welcome</string>
     <string name="des">It took like you are not enrolled in nay podcasts,but it\'s easy to get stated</string>
     <string name="find_something_new">Find something new</string>
+
+    <string name="dot">&#8226;</string>
 </resources>

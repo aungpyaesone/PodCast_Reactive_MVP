@@ -16,4 +16,8 @@ object DownloadedPresenterImpl : DownloadedPresenter,AbstractBasePresenter<Downl
     override fun onTapReload() {
         Log.d("onTouch","reload")
     }
+
+    override fun onTouchDownloadedItem() {
+        mView?.navigateToDetail()
+    }
 }

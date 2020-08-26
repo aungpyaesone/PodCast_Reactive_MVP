@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.postcast_reactive_mvp.R
+import com.example.postcast_reactive_mvp.activities.PodCastDetailActivity
 import com.example.postcast_reactive_mvp.adapters.DownloadedListAdapter
 import com.example.postcast_reactive_mvp.adapters.LatestPodCastListAdapter
 import com.example.postcast_reactive_mvp.mvp.presenters.DownloadedPresenter
@@ -79,7 +80,7 @@ class DownloadFragment : BaseFragment(),DownloadedView {
     }
 
     private fun setUpRecycler(){
-        mAdapter = DownloadedListAdapter()
+        mAdapter = DownloadedListAdapter(mPresenter)
         rvDownloadedList.apply {
             layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL,false)
             adapter = mAdapter
@@ -100,6 +101,10 @@ class DownloadFragment : BaseFragment(),DownloadedView {
 
     override fun showDownloadedList(downloadedVO: String) {
 
+    }
+
+    override fun navigateToDetail() {
+        startActivity(activity?.let { PodCastDetailActivity.newIntent(it) })
     }
 
     override fun showErrorMessage(error: String) {
