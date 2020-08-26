@@ -42,7 +42,7 @@
             android:layout_margin="@dimen/margin_large"
             android:text="@string/title"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/text_heading_1x" />
+            android:textSize="@dimen/text_regular_3x" />
 
         <TextView
             android:id="@+id/tvTime"
@@ -91,7 +91,6 @@
             android:layout_height="@dimen/margin_medium"
             android:layout_alignTop="@id/tvThird"
             android:layout_alignEnd="@id/podCastTitle"
-            android:layout_marginEnd="@dimen/margin_medium"
             android:background="@drawable/black_point" />
 
         <View
