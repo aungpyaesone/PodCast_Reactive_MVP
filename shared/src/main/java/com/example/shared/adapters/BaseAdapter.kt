@@ -7,12 +7,12 @@ abstract class BaseAdapter<T: BaseViewHolder<W>,W> : RecyclerView.Adapter<T>(){
     private var mDataList:MutableList<W> = mutableListOf()
 
     override fun onBindViewHolder(holder: T, position: Int) {
-     //   holder.bindData(mDataList[position])
+        holder.bindData(mDataList[position])
     }
 
     override fun getItemCount(): Int {
-       // return mDataList.size
-        return 10
+        return mDataList.size
+
     }
 
     fun setData (data : List<W>){

@@ -2,6 +2,7 @@ package com.example.shared.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.shared.mvp.views.BaseView
 import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseActivity : AppCompatActivity(){

@@ -49,6 +49,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_medium_2"
+            android:paddingStart="@dimen/margin_medium_2"
+            android:clipToPadding="false"
             android:layout_below="@id/tvCategories"
             tools:listitem="@layout/categories_item_view"
             />

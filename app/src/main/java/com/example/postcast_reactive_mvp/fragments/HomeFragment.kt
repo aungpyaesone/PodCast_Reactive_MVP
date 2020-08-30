@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.postcast_reactive_mvp.R
 import com.example.postcast_reactive_mvp.activities.PodCastDetailActivity
 import com.example.postcast_reactive_mvp.adapters.LatestPodCastListAdapter
-import com.example.postcast_reactive_mvp.data.vos.PodCastVO
+import com.example.postcast_reactive_mvp.data.vos.RandomPodcastVO
 import com.example.postcast_reactive_mvp.mvp.presenters.HomePresenter
 import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.HomePresenterImpl
 import com.example.postcast_reactive_mvp.mvp.views.HomeView
@@ -60,6 +60,7 @@ class HomeFragment : BaseFragment(),HomeView{
     }
 
     private fun setUpPresenter(){
+       // mPresenter = ViewModelProviders.of(this).get(HomePresenterImpl::class.java)
         mPresenter = HomePresenterImpl
         mPresenter.initPresenter(this)
     }
@@ -91,8 +92,8 @@ class HomeFragment : BaseFragment(),HomeView{
             }
     }
 
-    override fun showLatestPodCastList(latestPodCastVO: List<PodCastVO>) {
-        mAdapter.setData(latestPodCastVO)
+    override fun showLatestPodCastList(latestPodCastVORandom: List<RandomPodcastVO>) {
+        mAdapter.setData(latestPodCastVORandom)
     }
 
     override fun navigateToDetailActivity() {
@@ -100,5 +101,13 @@ class HomeFragment : BaseFragment(),HomeView{
     }
 
     override fun showErrorMessage(error: String) {
+    }
+
+    override fun showLoading() {
+
+    }
+
+    override fun hideLoading() {
+
     }
 }

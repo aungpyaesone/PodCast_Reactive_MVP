@@ -26,4 +26,15 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+def sensitvieDP = loadSensitiveData()
+ext{
+    verySensitiveData = sensitvieDP.getProperty("API_KEY")
+}
+
+def loadSensitiveData(){
+    Properties sensitiveLoadDataProperties = new Properties()
+    sensitiveLoadDataProperties.load(project.rootProject.file('sensitive_data.properties').newDataInputStream())
+    return sensitiveLoadDataProperties
+}
 apply from : 'libraries.gradle'

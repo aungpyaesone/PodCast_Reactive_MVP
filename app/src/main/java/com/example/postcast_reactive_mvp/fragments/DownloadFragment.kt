@@ -1,7 +1,6 @@
 package com.example.postcast_reactive_mvp.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.postcast_reactive_mvp.R
 import com.example.postcast_reactive_mvp.activities.PodCastDetailActivity
 import com.example.postcast_reactive_mvp.adapters.DownloadedListAdapter
-import com.example.postcast_reactive_mvp.adapters.LatestPodCastListAdapter
 import com.example.postcast_reactive_mvp.mvp.presenters.DownloadedPresenter
 import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.DownloadedPresenterImpl
-import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.HomePresenterImpl
 import com.example.postcast_reactive_mvp.mvp.views.DownloadedView
 import com.example.postcast_reactive_mvp.views.viewpods.EmptyViewPod
 import com.example.shared.fragments.BaseFragment
 import kotlinx.android.synthetic.main.fragment_download.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.emptyViewPod
 
 
@@ -59,14 +55,7 @@ class DownloadFragment : BaseFragment(),DownloadedView {
         setUpViewPod()
         setUpRecycler()
         mPresenter.onUiReady()
-        requestData()
-
-    }
-
-    private fun requestData() {
-        val list = arrayListOf<String>()
-        mAdapter.setData(list)
-    }
+      }
 
     private fun setUpPresenter(){
         mPresenter = DownloadedPresenterImpl
@@ -99,15 +88,19 @@ class DownloadFragment : BaseFragment(),DownloadedView {
             }
     }
 
-    override fun showDownloadedList(downloadedVO: String) {
-
-    }
-
     override fun navigateToDetail() {
         startActivity(activity?.let { PodCastDetailActivity.newIntent(it) })
     }
 
     override fun showErrorMessage(error: String) {
+
+    }
+
+    override fun showLoading() {
+
+    }
+
+    override fun hideLoading() {
 
     }
 }

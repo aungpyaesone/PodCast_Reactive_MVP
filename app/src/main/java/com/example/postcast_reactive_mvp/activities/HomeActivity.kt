@@ -20,6 +20,8 @@ class HomeActivity : BaseActivity() {
         setUpBottomNav();
     }
 
+
+
     private fun setUpBottomNav(){
         bottomNav.setOnNavigationItemSelectedListener(object :
             BottomNavigationView.OnNavigationItemSelectedListener{
@@ -27,6 +29,7 @@ class HomeActivity : BaseActivity() {
                 when(item.itemId){
                     R.id.home -> {
                         callFragment(HomeFragment.newInstance("a","b"))
+
                         return true
                     }
                     R.id.search -> {
@@ -49,6 +52,8 @@ class HomeActivity : BaseActivity() {
     }
 
   fun callFragment(fragment: Fragment){
+   // val fActive = HomeFragment.newInstance("a","b")
+   // supportFragmentManager.beginTransaction().add(R.id.container,fragment).hide(fragment).commit()
     supportFragmentManager.beginTransaction().replace(R.id.container,fragment).commit()
 }
 }

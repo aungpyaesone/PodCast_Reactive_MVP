@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.postcast_reactive_mvp.R
 import com.example.postcast_reactive_mvp.adapters.CategoriesListAdapter
 import com.example.postcast_reactive_mvp.adapters.LatestPodCastListAdapter
+import com.example.postcast_reactive_mvp.data.vos.CategoryVO
 import com.example.postcast_reactive_mvp.mvp.presenters.SearchPresenter
 import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.HomePresenterImpl
 import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.SearchPresenterImpl
+import com.example.postcast_reactive_mvp.mvp.views.SearchView
 import com.example.shared.fragments.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -23,7 +25,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
-class SearchFragment : BaseFragment() {
+class SearchFragment : BaseFragment(),SearchView {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -51,16 +53,14 @@ class SearchFragment : BaseFragment() {
         setUpPresenter()
         setUpRecycler()
         mPresenter.onUiReady()
-        requestData()
+
     }
 
-    private fun requestData() {
-        val list = arrayListOf<String>()
-        mAdapter.setData(list)
-    }
+
 
     private fun setUpPresenter(){
         mPresenter = SearchPresenterImpl
+        mPresenter.initPresenter(this)
     }
 
     private fun setUpRecycler(){
@@ -83,5 +83,21 @@ class SearchFragment : BaseFragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun showCategories(categoriesVO: List<CategoryVO>) {
+        mAdapter.setData(categoriesVO)
+    }
+
+    override fun showErrorMessage(error: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showLoading() {
+        TODO("Not yet implemented")
+    }
+
+    override fun hideLoading() {
+        TODO("Not yet implemented")
     }
 }

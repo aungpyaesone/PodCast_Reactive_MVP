@@ -1,15 +1,16 @@
 package com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls
 
 import android.util.Log
-import com.example.postcast_reactive_mvp.data.models.PodCastModelImpl
+import com.example.postcast_reactive_mvp.data.models.modelImpls.PodCastModelImpl
 import com.example.postcast_reactive_mvp.mvp.presenters.HomePresenter
 import com.example.postcast_reactive_mvp.mvp.views.HomeView
 import com.example.shared.mvp.presenters.AbstractBasePresenter
 
 object HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
-    private val mPodcastModel = PodCastModelImpl
+    private val mPodcastModel =
+        PodCastModelImpl
     override fun onUiReady() {
-        mView?.showLatestPodCastList(mPodcastModel.getAllPodCast())
+
     }
 
     override fun onTouchLatestEpisode() {

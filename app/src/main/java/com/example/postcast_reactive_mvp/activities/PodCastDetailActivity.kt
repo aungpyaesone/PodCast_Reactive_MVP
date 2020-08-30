@@ -19,4 +19,6 @@ class PodCastDetailActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pod_cast_detail)
     }
+
+
 }
