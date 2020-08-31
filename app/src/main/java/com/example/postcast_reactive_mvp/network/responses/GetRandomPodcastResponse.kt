@@ -9,13 +9,12 @@ import com.google.gson.annotations.SerializedName
 
 @Entity (tableName = "random_podcast")
 data class GetRandomPodcastResponse(
+    @PrimaryKey
+    @SerializedName("id")var id: String,
     @SerializedName("audio")var audio: String,
     @SerializedName("audio_length_sec")var audio_length_sec: Int,
     @SerializedName("description")var description: String,
     @SerializedName("explicit_content")var explicit_content: Boolean,
-
-    @PrimaryKey
-    @SerializedName("id")var id: String,
     @SerializedName("image")var image: String,
     @SerializedName("link")var link: String,
     @SerializedName("listennotes_edit_url")var listennotes_edit_url: String,

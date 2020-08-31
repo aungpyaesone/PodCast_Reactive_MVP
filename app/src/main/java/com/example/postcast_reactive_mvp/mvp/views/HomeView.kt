@@ -1,9 +1,13 @@
 package com.example.postcast_reactive_mvp.mvp.views
 
-import com.example.postcast_reactive_mvp.data.vos.RandomPodcastVO
+import com.example.postcast_reactive_mvp.data.vos.ItemVO
+import com.example.postcast_reactive_mvp.data.vos.PodcastVO
+import com.example.postcast_reactive_mvp.network.responses.GetRandomPodcastResponse
 import com.example.shared.mvp.views.BaseView
 
 interface HomeView : BaseView {
-    fun showLatestPodCastList(latestPodCastVORandom: List<RandomPodcastVO>)
+    fun bindRandomPodCast(latestPodCastVORandom: GetRandomPodcastResponse)
     fun navigateToDetailActivity()
+
+    fun bindLatestPodCastList(latestpodCastList: List<ItemVO>)
 }

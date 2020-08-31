@@ -6,18 +6,19 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.postcast_reactive_mvp.data.vos.RandomPodcastVO
+import com.example.postcast_reactive_mvp.network.responses.GetRandomPodcastResponse
 
 @Dao
 interface RandomPodCastDao {
-    @Query("SELECT * FROM podcast")
-    fun getAllPodCast() : LiveData<List<RandomPodcastVO>>
+    @Query("SELECT * FROM random_podcast")
+    fun getAllPodCast() : LiveData<List<GetRandomPodcastResponse>>
 
-    @Query("SELECT * FROM podcast WHERE id = :podCastId")
-    fun getPodCastById(podCastId :Int) : LiveData<RandomPodcastVO>
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertPodCast(podCastVORandom: RandomPodcastVO)
+    @Query("SELECT * FROM random_podcast WHERE id = :podCastId")
+    fun getPodCastById(podCastId :Int) : LiveData<GetRandomPodcastResponse>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertPodCastList(podCast: List<RandomPodcastVO>)
+    fun insertPodCast(podCastVORandom: GetRandomPodcastResponse)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertPodCastList(podCast: List<GetRandomPodcastResponse>)
 }

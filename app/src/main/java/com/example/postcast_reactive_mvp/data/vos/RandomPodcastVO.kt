@@ -7,8 +7,6 @@ import com.google.gson.annotations.SerializedName
 
 
 data class RandomPodcastVO(
-    @PrimaryKey
-    @NonNull
     @SerializedName("id")var id: String,
     @SerializedName("image")var image: String,
     @SerializedName("listennotes_url")var listennotes_url: String,

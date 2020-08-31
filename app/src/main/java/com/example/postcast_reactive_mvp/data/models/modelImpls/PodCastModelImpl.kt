@@ -5,9 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.postcast_reactive_mvp.data.models.BaseModel
 import com.example.postcast_reactive_mvp.data.models.PodCastModel
-import com.example.postcast_reactive_mvp.data.vos.CategoryVO
-import com.example.postcast_reactive_mvp.data.vos.GenreVO
-import com.example.postcast_reactive_mvp.data.vos.ItemVO
+import com.example.postcast_reactive_mvp.data.vos.*
+import com.example.postcast_reactive_mvp.network.responses.GetDetailResponse
 import com.example.postcast_reactive_mvp.network.responses.GetRandomPodcastResponse
 import com.example.postcast_reactive_mvp.util.API_KEY
 import com.example.postcast_reactive_mvp.util.EN_ERROR_MESSAGE
@@ -20,7 +19,7 @@ object PodCastModelImpl : PodCastModel,BaseModel() {
     // get random podcast from network and save to db
     @SuppressLint("CheckResult")
     override fun getRandomPodcastEpisodeFromApiSaveToDb(
-        onSuccess: () -> Unit,
+        onSuccess: (GetRandomPodcastResponse) -> Unit,
         onError: (String) -> Unit
     ) {
         mClientApi.randomPodcastEpisode(API_KEY)
@@ -28,16 +27,18 @@ object PodCastModelImpl : PodCastModel,BaseModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-
+                it?.let {data ->
+                    onSuccess(data)
+                    mTheDB.randomPodCastDao().insertPodCast(data)
+                }
             },{
                 onError(it.localizedMessage ?: EN_ERROR_MESSAGE)
             })
     }
 
     //get random podcast from persistence
-    override fun getRandomPodcastEpisodeFromDb(): LiveData<GetRandomPodcastResponse> {
-        val liveData = MutableLiveData<GetRandomPodcastResponse>()
-        return liveData
+    override fun getRandomPodcastEpisodeFromDb(): LiveData<List<GetRandomPodcastResponse>> {
+        return mTheDB.randomPodCastDao().getAllPodCast()
     }
 
     // get podcat with gener
@@ -48,31 +49,56 @@ object PodCastModelImpl : PodCastModel,BaseModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-
+                it?.let { data ->
+                    mTheDB.genreDao().insertGenerList(data)
+                }
             },{
                 onError(it.localizedMessage ?: EN_ERROR_MESSAGE)
             })
     }
 
     override fun getPodcastGenersFromDb(): LiveData<List<GenreVO>> {
-        TODO("Not yet implemented")
+        return mTheDB.genreDao().getAllGener()
     }
 
     @SuppressLint("CheckResult")
     override fun getPlayListInfoFromApiSaveToDb(onSuccess: () -> Unit, onError: (String) -> Unit) {
         mClientApi.getPodCastPlaylistInfoAndItem(API_KEY,"SgTozE1ZAe3")
-            .map { it.item.toList() }
+            .map {
+                it.item.toList()
+            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-
+                it?.let {
+                    mTheDB.playlistDao().insertPlayLists(it)
+                }
             },{
                 onError(it.localizedMessage ?: EN_ERROR_MESSAGE)
             })
     }
 
     override fun getPlayListInfoFromDb(): LiveData<List<ItemVO>> {
-        TODO("Not yet implemented")
+       return mTheDB.playlistDao().getAllPlayList()
+    }
+
+    @SuppressLint("CheckResult")
+    override fun getDetailFromApiSaveToDb(id:String, onSuccess: () -> Unit, onError: (String) -> Unit) {
+        mClientApi.getDetailForEpisode(API_KEY,id)
+            .map { it }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                it?.let {data ->
+                    mTheDB.detailDao().insertDetail(data)
+                }
+            },{
+                onError(it.localizedMessage ?: EN_ERROR_MESSAGE)
+            })
+    }
+
+    override fun getDetailFromDb(id: String): LiveData<GetDetailResponse> {
+        return mTheDB.detailDao().getDetailById(id)
     }
 
     override fun getAllCategories(): List<CategoryVO> {

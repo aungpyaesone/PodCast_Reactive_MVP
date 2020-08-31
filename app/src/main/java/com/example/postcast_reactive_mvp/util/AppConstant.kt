@@ -2,6 +2,7 @@ package com.example.postcast_reactive_mvp.util
 
 import com.example.postcast_reactive_mvp.BuildConfig
 
+
 const val BASE_URL = BuildConfig.BASE_URL_FIELD
 
 const val API_KEY = BuildConfig.API_KEY

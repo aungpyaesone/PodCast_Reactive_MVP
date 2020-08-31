@@ -6,5 +6,5 @@ import com.example.postcast_reactive_mvp.views.viewpods.EmptyViewPod
 import com.example.shared.mvp.presenters.BasePresenter
 
 interface DownloadedPresenter : BasePresenter<DownloadedView>,EmptyViewPod.Delegate,DownloadedItemDelegate{
-    fun onUiReady()
+
 }

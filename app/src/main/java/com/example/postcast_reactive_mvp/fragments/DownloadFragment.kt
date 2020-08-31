@@ -54,7 +54,7 @@ class DownloadFragment : BaseFragment(),DownloadedView {
         setUpPresenter()
         setUpViewPod()
         setUpRecycler()
-        mPresenter.onUiReady()
+        mPresenter.onUiReady(this)
       }
 
     private fun setUpPresenter(){

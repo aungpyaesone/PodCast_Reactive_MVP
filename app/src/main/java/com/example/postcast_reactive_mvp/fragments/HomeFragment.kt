@@ -5,16 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.postcast_reactive_mvp.R
 import com.example.postcast_reactive_mvp.activities.PodCastDetailActivity
 import com.example.postcast_reactive_mvp.adapters.LatestPodCastListAdapter
+import com.example.postcast_reactive_mvp.data.vos.ItemVO
+import com.example.postcast_reactive_mvp.data.vos.PodcastVO
 import com.example.postcast_reactive_mvp.data.vos.RandomPodcastVO
 import com.example.postcast_reactive_mvp.mvp.presenters.HomePresenter
 import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.HomePresenterImpl
 import com.example.postcast_reactive_mvp.mvp.views.HomeView
+import com.example.postcast_reactive_mvp.network.responses.GetRandomPodcastResponse
 import com.example.postcast_reactive_mvp.views.viewpods.EmptyViewPod
+import com.example.postcast_reactive_mvp.views.viewpods.MideaPlayerViewPod
 import com.example.shared.fragments.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -33,6 +38,7 @@ class HomeFragment : BaseFragment(),HomeView{
     private lateinit var mAdapter : LatestPodCastListAdapter
 
     private lateinit var mEmptyViewPod : EmptyViewPod
+    private lateinit var mMediaPlayerViewPod: MideaPlayerViewPod
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,13 +61,12 @@ class HomeFragment : BaseFragment(),HomeView{
         setUpPresenter()
         setUpViewPod()
         setUpRecycler()
-        mPresenter.onUiReady()
+        mPresenter.onUiReady(this)
 
     }
 
     private fun setUpPresenter(){
-       // mPresenter = ViewModelProviders.of(this).get(HomePresenterImpl::class.java)
-        mPresenter = HomePresenterImpl
+        mPresenter = ViewModelProviders.of(this).get(HomePresenterImpl::class.java)
         mPresenter.initPresenter(this)
     }
 
@@ -69,6 +74,9 @@ class HomeFragment : BaseFragment(),HomeView{
         mEmptyViewPod = emptyViewPod as EmptyViewPod
         mEmptyViewPod.setEmptyData("","")
         mEmptyViewPod.setDelegate(mPresenter)
+
+        mMediaPlayerViewPod = mediaPlayBack as MideaPlayerViewPod
+        mMediaPlayerViewPod.setDelegate(mPresenter)
     }
 
     private fun setUpRecycler(){
@@ -92,12 +100,17 @@ class HomeFragment : BaseFragment(),HomeView{
             }
     }
 
-    override fun showLatestPodCastList(latestPodCastVORandom: List<RandomPodcastVO>) {
-        mAdapter.setData(latestPodCastVORandom)
+    override fun bindRandomPodCast(latestPodCastVORandom: GetRandomPodcastResponse) {
+        tvDescription.text = latestPodCastVORandom.description
     }
+
 
     override fun navigateToDetailActivity() {
        startActivity(activity?.let { PodCastDetailActivity.newIntent(it) })
+    }
+
+    override fun bindLatestPodCastList(latestpodCastList: List<ItemVO>) {
+        mAdapter.setData(latestpodCastList)
     }
 
     override fun showErrorMessage(error: String) {

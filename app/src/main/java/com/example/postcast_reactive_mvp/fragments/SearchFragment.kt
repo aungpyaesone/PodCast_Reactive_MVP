@@ -5,18 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.postcast_reactive_mvp.R
 import com.example.postcast_reactive_mvp.adapters.CategoriesListAdapter
-import com.example.postcast_reactive_mvp.adapters.LatestPodCastListAdapter
-import com.example.postcast_reactive_mvp.data.vos.CategoryVO
+
+import com.example.postcast_reactive_mvp.data.vos.GenreVO
 import com.example.postcast_reactive_mvp.mvp.presenters.SearchPresenter
 import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.HomePresenterImpl
 import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.SearchPresenterImpl
 import com.example.postcast_reactive_mvp.mvp.views.SearchView
 import com.example.shared.fragments.BaseFragment
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_search.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,6 +32,7 @@ class SearchFragment : BaseFragment(),SearchView {
 
     private lateinit var mAdapter: CategoriesListAdapter
     private lateinit var mPresenter:SearchPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -52,14 +53,14 @@ class SearchFragment : BaseFragment(),SearchView {
         super.onViewCreated(view, savedInstanceState)
         setUpPresenter()
         setUpRecycler()
-        mPresenter.onUiReady()
+        mPresenter.onUiReady(this)
 
     }
 
 
 
     private fun setUpPresenter(){
-        mPresenter = SearchPresenterImpl
+        mPresenter = ViewModelProviders.of(this).get(SearchPresenterImpl::class.java)
         mPresenter.initPresenter(this)
     }
 
@@ -85,8 +86,13 @@ class SearchFragment : BaseFragment(),SearchView {
             }
     }
 
-    override fun showCategories(categoriesVO: List<CategoryVO>) {
-        mAdapter.setData(categoriesVO)
+
+    override fun showGenerList(generList: List<GenreVO>) {
+        mAdapter.setData(generList)
+    }
+
+    override fun bindData(generData: GenreVO) {
+        tvTitle.text = generData.name
     }
 
     override fun showErrorMessage(error: String) {
