@@ -8,8 +8,8 @@ import com.example.postcast_reactive_mvp.mvp.presenters.HomePresenter
 import com.example.postcast_reactive_mvp.mvp.views.HomeView
 import com.example.shared.mvp.presenters.AbstractBasePresenter
 
-object HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
-    private val mPodcastModel = PodCastModelImpl
+class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
+    private var mPodcastModel = PodCastModelImpl
 
     override fun onTouchLatestEpisode() {
         mView?.navigateToDetailActivity()
@@ -37,21 +37,31 @@ object HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
         mPodcastModel.getRandomPodcastEpisodeFromDb().observe(
             lifecycleOwner, Observer {
                 it?.let {data ->
-                    mView?.bindRandomPodCast(data.last())
+                    if ( data.isNotEmpty()){
+                        mView?.bindRandomPodCast(data.last())
+                    }
+
                 }
             }
         )
 
         mPodcastModel.getPlayListInfoFromDb().observe(
             lifecycleOwner, Observer { itemList ->
-                mView?.bindLatestPodCastList(itemList)
+                itemList?.let {
+                    mView?.bindLatestPodCastList(itemList)
+                }
+
             }
         )
     }
 
     private fun getDataFromApiSaveToDb(){
-       mPodcastModel.getRandomPodcastEpisodeFromApiSaveToDb({},onError = {
-          mView?.showErrorMessage(error = it)
+//       mPodcastModel.getRandomPodcastEpisodeFromApiSaveToDb({},onError = {
+//          mView?.showErrorMessage(error = it)
+//       })
+
+       mPodcastModel.getPlayListInfoFromApiSaveToDb({},{
+           mView?.showErrorMessage(it)
        })
     }
 }

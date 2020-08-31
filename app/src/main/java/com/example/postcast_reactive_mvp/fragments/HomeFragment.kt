@@ -12,8 +12,6 @@ import com.example.postcast_reactive_mvp.R
 import com.example.postcast_reactive_mvp.activities.PodCastDetailActivity
 import com.example.postcast_reactive_mvp.adapters.LatestPodCastListAdapter
 import com.example.postcast_reactive_mvp.data.vos.ItemVO
-import com.example.postcast_reactive_mvp.data.vos.PodcastVO
-import com.example.postcast_reactive_mvp.data.vos.RandomPodcastVO
 import com.example.postcast_reactive_mvp.mvp.presenters.HomePresenter
 import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.HomePresenterImpl
 import com.example.postcast_reactive_mvp.mvp.views.HomeView

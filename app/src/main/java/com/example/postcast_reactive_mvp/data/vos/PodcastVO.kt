@@ -1,17 +1,23 @@
 package com.example.postcast_reactive_mvp.data.vos
 
-import androidx.room.Entity
+import androidx.room.Embedded
+import androidx.room.TypeConverters
+import com.example.postcast_reactive_mvp.persistence.GenreTypeConverter
 import com.google.gson.annotations.SerializedName
 
-
+@TypeConverters(GenreTypeConverter::class)
 data class PodcastVO(
     @SerializedName("country") var country: String,
     @SerializedName("description") var description: String,
     @SerializedName("earliest_pub_date_ms") var earliest_pub_date_ms: Long,
     @SerializedName("email") var email: String,
     @SerializedName("explicit_content") var explicit_content: Boolean,
+
+    @Embedded(prefix = "_extra")
     @SerializedName("extra") var extra: ExtraVO,
+
     @SerializedName("genre_ids") var genre_ids: List<Int>,
+
     @SerializedName("id") var id: String,
     @SerializedName("image") var image: String,
     @SerializedName("is_claimed") var is_claimed: Boolean,
@@ -19,6 +25,8 @@ data class PodcastVO(
     @SerializedName("language") var language: String,
     @SerializedName("latest_pub_date_ms") var latest_pub_date_ms: Long,
     @SerializedName("listennotes_url") var listennotes_url: String,
+
+    @Embedded(prefix = "_lookingFor")
     @SerializedName("looking_for") var looking_for: LookingForVO,
     @SerializedName("publisher") var publisher: String,
     @SerializedName("rss") var rss: String,

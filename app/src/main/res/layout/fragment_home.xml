@@ -89,6 +89,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/test_text"
                             android:textStyle="bold"
+                            android:maxLines="4"
                             android:lineSpacingMultiplier="1.5"
                             />
                     </RelativeLayout>

@@ -11,13 +11,14 @@ data class DataVO(
     @SerializedName("description")var description: String,
     @SerializedName("explicit_content")var explicit_content: Boolean,
 
-    @SerializedName("id")var id: String,
+    @SerializedName("id")var data_id: String,
     @SerializedName("image")var image: String,
     @SerializedName("link")var link: String,
     @SerializedName("listennotes_edit_url")var listennotes_edit_url: String,
     @SerializedName("listennotes_url")var listennotes_url: String,
     @SerializedName("maybe_audio_invarid")var maybe_audio_invarid: Boolean,
 
+    @Embedded (prefix = "_podcast")
     @SerializedName("podcast")var podcast: PodcastVO,
     @SerializedName("pub_date_ms")var pub_date_ms: Long,
     @SerializedName("thumbnail")var thumbnail: String,

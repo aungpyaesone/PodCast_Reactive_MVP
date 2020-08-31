@@ -63,7 +63,14 @@ object PodCastModelImpl : PodCastModel,BaseModel() {
 
     @SuppressLint("CheckResult")
     override fun getPlayListInfoFromApiSaveToDb(onSuccess: () -> Unit, onError: (String) -> Unit) {
-        mClientApi.getPodCastPlaylistInfoAndItem(API_KEY,"SgTozE1ZAe3")
+        mClientApi.getPodCastPlaylistInfoAndItem(
+            API_KEY,
+            "SgTozE1ZAe3",
+            "episode_list",
+            "0",
+            "recent_added_first"
+
+        )
             .map {
                 it.item.toList()
             }

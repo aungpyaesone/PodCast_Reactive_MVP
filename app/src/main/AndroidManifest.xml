@@ -4,6 +4,7 @@
     package="com.example.postcast_reactive_mvp">
 
     <application
+        android:name=".PodCastApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="${appName}"
