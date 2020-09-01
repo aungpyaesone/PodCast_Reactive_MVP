@@ -100,11 +100,11 @@ class HomeFragment : BaseFragment(),HomeView{
 
     override fun bindRandomPodCast(latestPodCastVORandom: GetRandomPodcastResponse) {
         tvDescription.text = latestPodCastVORandom.description
+        mMediaPlayerViewPod.setData(latestPodCastVORandom.randomPodcast.title,latestPodCastVORandom.audio_length_sec,latestPodCastVORandom.image)
     }
 
-
-    override fun navigateToDetailActivity() {
-       startActivity(activity?.let { PodCastDetailActivity.newIntent(it) })
+    override fun navigateToDetailActivity(id: String) {
+        startActivity(activity?.let { PodCastDetailActivity.newIntent(it,id) })
     }
 
     override fun bindLatestPodCastList(latestpodCastList: List<ItemVO>) {

@@ -2,7 +2,6 @@ package com.example.postcast_reactive_mvp.data.models.modelImpls
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.postcast_reactive_mvp.data.models.BaseModel
 import com.example.postcast_reactive_mvp.data.models.PodCastModel
 import com.example.postcast_reactive_mvp.data.vos.*
@@ -10,7 +9,6 @@ import com.example.postcast_reactive_mvp.network.responses.GetDetailResponse
 import com.example.postcast_reactive_mvp.network.responses.GetRandomPodcastResponse
 import com.example.postcast_reactive_mvp.util.API_KEY
 import com.example.postcast_reactive_mvp.util.EN_ERROR_MESSAGE
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -29,7 +27,7 @@ object PodCastModelImpl : PodCastModel,BaseModel() {
             .subscribe({
                 it?.let {data ->
                     onSuccess(data)
-                    mTheDB.randomPodCastDao().insertPodCast(data)
+                   mTheDB.randomPodCastDao().insertPodCast(data)
                 }
             },{
                 onError(it.localizedMessage ?: EN_ERROR_MESSAGE)
@@ -65,11 +63,7 @@ object PodCastModelImpl : PodCastModel,BaseModel() {
     override fun getPlayListInfoFromApiSaveToDb(onSuccess: () -> Unit, onError: (String) -> Unit) {
         mClientApi.getPodCastPlaylistInfoAndItem(
             API_KEY,
-            "SgTozE1ZAe3",
-            "episode_list",
-            "0",
-            "recent_added_first"
-
+            "SgTozE1ZAe3"
         )
             .map {
                 it.item.toList()
@@ -77,8 +71,8 @@ object PodCastModelImpl : PodCastModel,BaseModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                it?.let {
-                    mTheDB.playlistDao().insertPlayLists(it)
+                it?.let {item->
+                    mTheDB.playlistDao().insertPlayList(item)
                 }
             },{
                 onError(it.localizedMessage ?: EN_ERROR_MESSAGE)
@@ -92,7 +86,9 @@ object PodCastModelImpl : PodCastModel,BaseModel() {
     @SuppressLint("CheckResult")
     override fun getDetailFromApiSaveToDb(id:String, onSuccess: () -> Unit, onError: (String) -> Unit) {
         mClientApi.getDetailForEpisode(API_KEY,id)
-            .map { it }
+            .map {
+                it
+            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

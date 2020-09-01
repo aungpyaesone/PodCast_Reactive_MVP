@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.example.postcast_reactive_mvp.data.models.modelImpls.PodCastModelImpl
+import com.example.postcast_reactive_mvp.data.vos.ItemVO
 import com.example.postcast_reactive_mvp.mvp.presenters.HomePresenter
 import com.example.postcast_reactive_mvp.mvp.views.HomeView
 import com.example.shared.mvp.presenters.AbstractBasePresenter
@@ -11,8 +12,8 @@ import com.example.shared.mvp.presenters.AbstractBasePresenter
 class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
     private var mPodcastModel = PodCastModelImpl
 
-    override fun onTouchLatestEpisode() {
-        mView?.navigateToDetailActivity()
+    override fun onTouchLatestEpisode(itemVO: ItemVO) {
+        mView?.navigateToDetailActivity(itemVO.data.data_id)
         Log.d("onTouch","onTouch")
     }
 
@@ -22,6 +23,7 @@ class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
 
     override fun onTapReload() {
         Log.d("onTouch","reload")
+        getDataFromApiSaveToDb()
     }
 
     override fun onTouchFifteenSec() {
@@ -33,7 +35,7 @@ class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
     }
 
     override fun onUiReady(lifecycleOwner: LifecycleOwner) {
-        getDataFromApiSaveToDb()
+      //  getDataFromApiSaveToDb()
         mPodcastModel.getRandomPodcastEpisodeFromDb().observe(
             lifecycleOwner, Observer {
                 it?.let {data ->
@@ -56,9 +58,9 @@ class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
     }
 
     private fun getDataFromApiSaveToDb(){
-//       mPodcastModel.getRandomPodcastEpisodeFromApiSaveToDb({},onError = {
-//          mView?.showErrorMessage(error = it)
-//       })
+       mPodcastModel.getRandomPodcastEpisodeFromApiSaveToDb({},onError = {
+          mView?.showErrorMessage(error = it)
+       })
 
        mPodcastModel.getPlayListInfoFromApiSaveToDb({},{
            mView?.showErrorMessage(it)

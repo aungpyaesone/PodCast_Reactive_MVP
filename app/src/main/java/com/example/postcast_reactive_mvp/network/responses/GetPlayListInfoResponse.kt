@@ -7,7 +7,7 @@ data class GetPlayListInfoResponse(
     @SerializedName("description")var description: String,
     @SerializedName("id")var id: String,
     @SerializedName("image")var image: String,
-    @SerializedName("item")var item: List<ItemVO>,
+    @SerializedName("items")var item: List<ItemVO>,
     @SerializedName("last_timestamp_ms")var last_timestamp_ms: Long,
     @SerializedName("listennotes_url")var listennotes_url: String,
     @SerializedName("name")var name: String,

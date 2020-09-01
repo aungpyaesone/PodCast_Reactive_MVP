@@ -7,13 +7,10 @@ import androidx.room.RoomDatabase
 import com.example.postcast_reactive_mvp.data.vos.*
 import com.example.postcast_reactive_mvp.network.responses.GetDetailResponse
 import com.example.postcast_reactive_mvp.network.responses.GetRandomPodcastResponse
-import com.example.postcast_reactive_mvp.persistence.daos.DetailDao
-import com.example.postcast_reactive_mvp.persistence.daos.GenerDao
-import com.example.postcast_reactive_mvp.persistence.daos.PlaylistInfoDao
-import com.example.postcast_reactive_mvp.persistence.daos.RandomPodCastDao
+import com.example.postcast_reactive_mvp.persistence.daos.*
 
 @Database(entities = [GetRandomPodcastResponse::class,GenreVO::class,
-    GetDetailResponse::class,ItemVO::class],version = 1,exportSchema = false)
+    GetDetailResponse::class,ItemVO::class,PodcastVO::class],version = 5,exportSchema = false)
 abstract class PodCastDatabase : RoomDatabase() {
     companion object {
         val DB_NAME = "POD_CAST_DB"
@@ -35,6 +32,7 @@ abstract class PodCastDatabase : RoomDatabase() {
 
     abstract fun genreDao() : GenerDao
     abstract fun randomPodCastDao() : RandomPodCastDao
-    abstract fun playlistDao() : PlaylistInfoDao
+    abstract fun playlistDao() : PlayListDao
     abstract fun detailDao() : DetailDao
+
 }

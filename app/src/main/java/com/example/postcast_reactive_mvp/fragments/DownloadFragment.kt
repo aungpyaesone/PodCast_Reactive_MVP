@@ -89,7 +89,7 @@ class DownloadFragment : BaseFragment(),DownloadedView {
     }
 
     override fun navigateToDetail() {
-        startActivity(activity?.let { PodCastDetailActivity.newIntent(it) })
+        //startActivity(activity?.let { PodCastDetailActivity.newIntent(it) })
     }
 
     override fun showErrorMessage(error: String) {

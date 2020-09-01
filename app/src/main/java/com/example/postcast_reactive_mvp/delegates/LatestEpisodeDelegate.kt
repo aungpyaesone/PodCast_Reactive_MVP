@@ -1,5 +1,7 @@
 package com.example.postcast_reactive_mvp.delegates
 
+import com.example.postcast_reactive_mvp.data.vos.ItemVO
+
 interface LatestEpisodeDelegate {
-    fun onTouchLatestEpisode()
+    fun onTouchLatestEpisode(itemVO: ItemVO)
 }

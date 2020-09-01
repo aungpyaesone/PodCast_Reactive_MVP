@@ -92,6 +92,7 @@ dependencies {
     implementation rootProject.ext.libraries.retrofit
     implementation rootProject.ext.libraries.retorfitAdapter
     implementation rootProject.ext.libraries.retrofitGsonConverter
+    implementation rootProject.ext.libraries.loggingInterceptor
 
     implementation rootProject.ext.libraries.rxKotlin
     implementation rootProject.ext.libraries.rxIoReactive

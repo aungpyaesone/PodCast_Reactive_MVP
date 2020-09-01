@@ -3,6 +3,7 @@ package com.example.postcast_reactive_mvp.views.viewpods
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.RelativeLayout
+import com.example.shared.extensions.load
 import kotlinx.android.synthetic.main.media_play_back.view.*
 
 class MideaPlayerViewPod @JvmOverloads constructor(
@@ -18,6 +19,12 @@ class MideaPlayerViewPod @JvmOverloads constructor(
 
     fun setDelegate(delegate: Delegate){
         this.mDelegate = delegate
+    }
+
+    fun setData(title:String,duration:Int,url:String){
+        ivEpisodeTitle.text = title
+        ivPodcast.load(url)
+
     }
 
 

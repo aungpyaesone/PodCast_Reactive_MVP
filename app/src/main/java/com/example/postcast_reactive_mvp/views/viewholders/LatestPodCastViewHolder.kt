@@ -12,14 +12,16 @@ import kotlinx.android.synthetic.main.latest_podcast_item_view.view.*
 class LatestPodCastViewHolder(itemView: View,val mDelegate:LatestEpisodeDelegate) : BaseViewHolder<ItemVO>(itemView = itemView) {
     override fun bindData(item: ItemVO) {
         mData = item
-        itemView.categoryTitle.text = item.data.title
+       // itemView.categoryTitle.text = item.data.title
         itemView.ivPodcast.load(item.data.image)
-        itemView.tvCategoryTitle.text = item.data.podcast.genre_ids[0].toString()
-
+        itemView.tvCategoryTitle.text = item.data.title
     }
     init {
-        itemView.ivPodcast.setOnClickListener {
-            mDelegate.onTouchLatestEpisode()
+        itemView.setOnClickListener {
+            mData?.let {
+                mDelegate.onTouchLatestEpisode(it)
+            }
+
         }
     }
 

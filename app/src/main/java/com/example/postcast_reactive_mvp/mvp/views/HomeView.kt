@@ -7,7 +7,7 @@ import com.example.shared.mvp.views.BaseView
 
 interface HomeView : BaseView {
     fun bindRandomPodCast(latestPodCastVORandom: GetRandomPodcastResponse)
-    fun navigateToDetailActivity()
+    fun navigateToDetailActivity(id:String)
 
     fun bindLatestPodCastList(latestpodCastList: List<ItemVO>)
 }

@@ -29,6 +29,7 @@ ext{
     expressocontribVersion = "3.2.0"
     mokitoVersion = "3.1.0"
     extJunitVersion = "1.1.1"
+    interceptorVersion = "4.8.1"
    // androidTestImplementation "androidx.test.ext:junit-ktx:1.1.1"
 
 
@@ -52,6 +53,7 @@ ext{
             retrofit : "com.squareup.retrofit2:retrofit:$retrofitVersion",
             retorfitAdapter : "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion",
             retrofitGsonConverter : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+            loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$interceptorVersion",
 
             rxKotlin : "com.github.ReactiveX:RxKotlin:$rxKotlinVersion",
             rxIoReactive : "io.reactivex.rxjava2:rxandroid:$rxVersion",

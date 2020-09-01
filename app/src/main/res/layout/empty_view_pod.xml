@@ -71,7 +71,7 @@
                 android:layout_marginTop="@dimen/margin_small"
                 android:layout_marginEnd="@dimen/margin_medium_2"
                 android:backgroundTint="@color/category_text_color"
-                android:text="@string/find_something_new"
+                android:text="reload"
                 android:textColor="@color/text_color_primary" />
         </RelativeLayout>
 

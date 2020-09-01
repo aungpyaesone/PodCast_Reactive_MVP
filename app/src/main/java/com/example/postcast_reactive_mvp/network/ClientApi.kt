@@ -25,11 +25,7 @@ interface ClientApi {
     @GET(GET_PLAYLIST_INFO_AND_ITEM)
     fun getPodCastPlaylistInfoAndItem(
         @Header("X-ListenAPI-Key") api_key: String,
-        @Path("id") id:String,
-        @Query("type") type: String,
-        @Query("last_timestamp_ms") last_timestamp_ms: String,
-        @Query("sort") sort: String
-
+        @Path("id") id:String
     ): Observable<GetPlayListInfoResponse>
 
     @GET(GET_DETAIL_FOR_EPISODE)
