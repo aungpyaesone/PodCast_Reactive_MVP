@@ -13,13 +13,32 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class HomeActivity : BaseActivity() {
+
+    private val homeFragment = HomeFragment.newInstance("","")
+    private val searchFragment = SearchFragment.newInstance("","")
+    private val downloadFragment = DownloadFragment.newInstance("","")
+    private val profileFragment = ProfileFragment.newInstance("","")
+    private val fragmentManager = supportFragmentManager
+    private var activeFragment: Fragment = HomeFragment.newInstance("","")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        callFragment(HomeFragment.newInstance("",""))
-        setUpBottomNav();
+       // callFragment(HomeFragment.newInstance("",""))
+        setupFragmentManager()
+        callFragment(homeFragment)
+        setUpBottomNav()
+
     }
 
+    private fun setupFragmentManager() {
+        fragmentManager.beginTransaction().apply {
+            add(R.id.container,homeFragment,getString(R.string.home_fragment)).hide(homeFragment)
+            add(R.id.container,searchFragment,getString(R.string.search_fragment)).hide(searchFragment)
+            add(R.id.container,downloadFragment,getString(R.string.download_fragment)).hide(downloadFragment)
+            add(R.id.container,profileFragment,getString(R.string.profile_fragment)).hide(profileFragment)
+        }.commit()
+    }
 
 
     private fun setUpBottomNav(){
@@ -28,20 +47,19 @@ class HomeActivity : BaseActivity() {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 when(item.itemId){
                     R.id.home -> {
-                        callFragment(HomeFragment.newInstance("a","b"))
-
+                        callFragment(homeFragment)
                         return true
                     }
                     R.id.search -> {
-                        callFragment(SearchFragment.newInstance("b","d"))
+                        callFragment(searchFragment)
                         return true
                     }
                     R.id.download -> {
-                        callFragment(DownloadFragment.newInstance("e","f"))
+                        callFragment(downloadFragment)
                         return true
                     }
                     R.id.profile ->{
-                        callFragment(ProfileFragment.newInstance("g","h"))
+                        callFragment(profileFragment)
                         return true
                     }
                 }
@@ -52,8 +70,8 @@ class HomeActivity : BaseActivity() {
     }
 
   fun callFragment(fragment: Fragment){
-   // val fActive = HomeFragment.newInstance("a","b")
-   // supportFragmentManager.beginTransaction().add(R.id.container,fragment).hide(fragment).commit()
-    supportFragmentManager.beginTransaction().replace(R.id.container,fragment).commit()
+      fragmentManager.beginTransaction().hide(activeFragment).show(fragment).commit()
+      activeFragment = fragment
+    //supportFragmentManager.beginTransaction().replace(R.id.container,fragment).commit()
 }
 }

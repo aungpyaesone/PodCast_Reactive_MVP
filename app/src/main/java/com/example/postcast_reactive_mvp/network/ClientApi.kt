@@ -19,7 +19,7 @@ interface ClientApi {
     @GET(GET_PODCAST_GENER)
     fun getPodcatGener(
         @Header("X-ListenAPI-Key") api_key: String,
-        @Path("top_level_only") value: String
+        @Query("top_level_only") value: String
     ): Observable<GetPodcastGenerResponse>
 
     @GET(GET_PLAYLIST_INFO_AND_ITEM)

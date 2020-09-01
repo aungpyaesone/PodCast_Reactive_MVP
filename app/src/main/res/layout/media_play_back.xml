@@ -26,7 +26,7 @@
             android:scaleType="centerCrop"
             android:layout_margin="@dimen/margin_medium_2"
             app:cornerRadius="@dimen/margin_medium_2"
-            android:src="@drawable/podcast"
+            android:src="@drawable/placeholder"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,13 +70,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivPodcast" />
 
-        <TextView
+        <ImageView
             android:id="@+id/tvBackward"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_below="@id/ivPodcast"
             android:layout_toEndOf="@id/tvPlaySpeed"
-            android:text="@string/pre_mins"
+            android:src="@drawable/ic_baseline_replay_10_24"
             style="@style/playBackText"
             app:layout_constraintBottom_toBottomOf="@+id/tvPlaySpeed"
             app:layout_constraintEnd_toStartOf="@+id/imageView"
@@ -103,12 +103,13 @@
 
         <TextView
             android:id="@+id/tvForward"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_below="@id/ivPodcast"
             android:layout_toEndOf="@id/tvPlaySpeed"
-            android:text="@string/pre_mins"
+            android:background="@drawable/ic_baseline_replay_30_24"
             style="@style/playBackText"
+            android:textDirection="anyRtl"
             app:layout_constraintBottom_toBottomOf="@+id/tvBackward"
             app:layout_constraintEnd_toStartOf="@+id/textView3"
             app:layout_constraintHorizontal_bias="0.5"
@@ -131,6 +132,7 @@
             app:layout_constraintTop_toTopOf="@+id/tvBackward" />
 
         <TextView
+            android:id="@+id/tvDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1h left"

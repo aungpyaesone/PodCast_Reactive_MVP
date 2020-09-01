@@ -7,7 +7,7 @@ import com.example.postcast_reactive_mvp.mvp.presenters.SearchPresenter
 import com.example.postcast_reactive_mvp.mvp.views.SearchView
 import com.example.shared.mvp.presenters.AbstractBasePresenter
 
-object SearchPresenterImpl : SearchPresenter,AbstractBasePresenter<SearchView>() {
+class SearchPresenterImpl : SearchPresenter,AbstractBasePresenter<SearchView>() {
     private val mPodcastModel = PodCastModelImpl
 
     override fun onUiReady(lifecycleOwner: LifecycleOwner) {
@@ -17,7 +17,9 @@ object SearchPresenterImpl : SearchPresenter,AbstractBasePresenter<SearchView>()
             lifecycleOwner, Observer {
                 it?.let {
                     mView?.showGenerList(it)
-                    mView?.bindData(it.first())
+                    if(it.isNotEmpty()) {
+                        mView?.bindData(it[0])
+                    }
                 }
             }
         )

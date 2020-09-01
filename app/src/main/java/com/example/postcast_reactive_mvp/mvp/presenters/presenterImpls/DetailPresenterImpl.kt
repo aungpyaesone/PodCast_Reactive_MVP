@@ -1,5 +1,6 @@
 package com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls
 
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.example.postcast_reactive_mvp.data.models.modelImpls.PodCastModelImpl
@@ -16,7 +17,7 @@ class DetailPresenterImpl : DetailPresenter,AbstractBasePresenter<DetailView>() 
         mModel.getDetailFromDb(pid).observe(
             lifecycleOwner, Observer {
                 it?.let {
-                    mView?.showDetail(it.podcastVO)
+                    mView?.showDetail(it)
                 }
             }
         )
@@ -24,6 +25,14 @@ class DetailPresenterImpl : DetailPresenter,AbstractBasePresenter<DetailView>() 
 
     override fun onUiReady(lifecycleOwner: LifecycleOwner) {
 
+    }
+
+    override fun onTouchFifteenSec() {
+       Log.d("onTouch","on touch")
+    }
+
+    override fun onTouchThirtySec() {
+        Log.d("onTouch","on touch")
     }
 
     private fun requestData(pid:String){

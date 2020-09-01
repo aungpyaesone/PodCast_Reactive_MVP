@@ -57,8 +57,6 @@ class SearchFragment : BaseFragment(),SearchView {
 
     }
 
-
-
     private fun setUpPresenter(){
         mPresenter = ViewModelProviders.of(this).get(SearchPresenterImpl::class.java)
         mPresenter.initPresenter(this)

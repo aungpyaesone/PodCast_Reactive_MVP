@@ -15,7 +15,7 @@
                 android:layout_height="350dp"
                 android:layout_margin="@dimen/margin_medium_2"
                 app:cornerRadius="@dimen/margin_large"
-                android:src="@drawable/podcast"
+                android:src="@drawable/placeholder"
                 android:scaleType="centerCrop"
                 />
             <TextView

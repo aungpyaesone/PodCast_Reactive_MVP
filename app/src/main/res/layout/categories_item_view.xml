@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/margin_medium_2"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_marginEnd="@dimen/margin_medium_2">
 
 
-        <com.example.postcast_reactive_mvp.views.components.RoundedCornerImageView
-            android:id="@+id/ivPodcast"
-            android:layout_width="350dp"
-            android:layout_height="220dp"
-            android:src="@drawable/podcast"
-            app:cornerRadius="@dimen/margin_medium_2"
-            android:scaleType="centerCrop"
-            />
+    <com.example.postcast_reactive_mvp.views.components.RoundedCornerImageView
+        android:id="@+id/ivPodcast"
+        android:layout_width="350dp"
+        android:layout_height="220dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/placeholder"
+        app:cornerRadius="@dimen/margin_medium_2" />
+
+    <TextView
+        android:id="@+id/categoryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/ivPodcast"
+        android:layout_alignTop="@id/ivPodcast"
+        android:layout_alignEnd="@id/ivPodcast"
+        android:layout_alignBottom="@id/ivPodcast"
+        android:gravity="center"
+        android:text="@string/category_title"/>
 
 </RelativeLayout>
 

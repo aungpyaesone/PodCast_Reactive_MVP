@@ -23,7 +23,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_xxlarge"
                 android:scaleType="centerCrop"
-                android:src="@drawable/podcast" />
+                android:src="@drawable/placeholder" />
 
             <TextView
                 android:id="@+id/tvTitle"
