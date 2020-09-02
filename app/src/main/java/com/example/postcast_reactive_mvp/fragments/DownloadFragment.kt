@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.postcast_reactive_mvp.R
 import com.example.postcast_reactive_mvp.activities.PodCastDetailActivity
 import com.example.postcast_reactive_mvp.adapters.DownloadedListAdapter
+import com.example.postcast_reactive_mvp.data.vos.DataVO
 import com.example.postcast_reactive_mvp.mvp.presenters.DownloadedPresenter
 import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.DownloadedPresenterImpl
 import com.example.postcast_reactive_mvp.mvp.views.DownloadedView
@@ -58,7 +60,7 @@ class DownloadFragment : BaseFragment(),DownloadedView {
       }
 
     private fun setUpPresenter(){
-        mPresenter = DownloadedPresenterImpl
+        mPresenter = ViewModelProviders.of(this).get(DownloadedPresenterImpl::class.java)
         mPresenter.initPresenter(this)
     }
 
@@ -88,8 +90,12 @@ class DownloadFragment : BaseFragment(),DownloadedView {
             }
     }
 
-    override fun navigateToDetail() {
-        //startActivity(activity?.let { PodCastDetailActivity.newIntent(it) })
+    override fun navigateToDetail(id: String) {
+        startActivity(activity?.let { PodCastDetailActivity.newIntent(it,id) })
+    }
+
+    override fun showDownloadList(dataVO: List<DataVO>) {
+        mAdapter.setData(dataVO)
     }
 
     override fun showErrorMessage(error: String) {

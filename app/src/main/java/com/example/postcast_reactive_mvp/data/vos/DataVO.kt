@@ -1,15 +1,20 @@
 package com.example.postcast_reactive_mvp.data.vos
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.example.postcast_reactive_mvp.persistence.PodCastConverter
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "podcast_data")
+@TypeConverters(PodCastConverter::class)
 data class DataVO(
     @SerializedName("audio")var audio: String,
     @SerializedName("audio_length_sec")var audio_length_sec: Int,
     @SerializedName("description")var description: String,
     @SerializedName("explicit_content")var explicit_content: Boolean,
 
+    @PrimaryKey
     @SerializedName("id")var data_id: String,
     @SerializedName("image")var image: String,
     @SerializedName("link")var link: String,

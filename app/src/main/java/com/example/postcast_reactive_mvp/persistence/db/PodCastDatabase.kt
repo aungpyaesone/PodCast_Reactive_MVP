@@ -10,7 +10,9 @@ import com.example.postcast_reactive_mvp.network.responses.GetRandomPodcastRespo
 import com.example.postcast_reactive_mvp.persistence.daos.*
 
 @Database(entities = [GetRandomPodcastResponse::class,GenreVO::class,
-    GetDetailResponse::class,ItemVO::class,PodcastVO::class],version = 5,exportSchema = false)
+    GetDetailResponse::class,ItemVO::class,PodcastVO::class,
+    DataVO::class
+],version = 6,exportSchema = false)
 abstract class PodCastDatabase : RoomDatabase() {
     companion object {
         val DB_NAME = "POD_CAST_DB"
@@ -34,5 +36,6 @@ abstract class PodCastDatabase : RoomDatabase() {
     abstract fun randomPodCastDao() : RandomPodCastDao
     abstract fun playlistDao() : PlayListDao
     abstract fun detailDao() : DetailDao
+    abstract fun downloadDao() : DownloadDao
 
 }

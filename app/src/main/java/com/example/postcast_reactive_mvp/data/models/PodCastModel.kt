@@ -27,7 +27,13 @@ interface PodCastModel {
     fun getDetailFromDb(id: String) : LiveData<GetDetailResponse>
 
     // Download Manager
-    fun downloadPodcast(context: Context,itemVO: ItemVO)
+    fun downloadPodcast(context: Context,itemVO: ItemVO) : Long
+
+    // getDownloadFromDb
+    fun getAllDownload():LiveData<List<DataVO>>
+
+    // saveDataVOToDb
+    fun saveDownloadItem(dataVO: DataVO)
 
 
 

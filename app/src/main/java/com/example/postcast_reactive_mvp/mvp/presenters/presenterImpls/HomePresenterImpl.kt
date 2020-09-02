@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.example.postcast_reactive_mvp.data.models.modelImpls.PodCastModelImpl
+import com.example.postcast_reactive_mvp.data.vos.DataVO
 import com.example.postcast_reactive_mvp.data.vos.ItemVO
 import com.example.postcast_reactive_mvp.mvp.presenters.HomePresenter
 import com.example.postcast_reactive_mvp.mvp.views.HomeView
@@ -40,8 +41,12 @@ class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
         Log.d("onTouch","30 Sec")
     }
 
-    override fun download(context: Context, itemVO: ItemVO){
-        mPodcastModel.downloadPodcast(context,itemVO)
+    override fun download(context: Context, itemVO: ItemVO):Long{
+       return mPodcastModel.downloadPodcast(context,itemVO)
+    }
+
+    override fun saveDownload(dataVO: DataVO) {
+        mPodcastModel.saveDownloadItem(dataVO)
     }
 
 

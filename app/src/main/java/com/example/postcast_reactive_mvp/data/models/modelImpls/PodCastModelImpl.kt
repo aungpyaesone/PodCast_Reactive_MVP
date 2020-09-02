@@ -1,10 +1,7 @@
 package com.example.postcast_reactive_mvp.data.models.modelImpls
 
 import android.annotation.SuppressLint
-import android.app.DownloadManager
 import android.content.Context
-import android.net.Uri
-import android.os.Environment
 import androidx.lifecycle.LiveData
 import com.example.postcast_reactive_mvp.data.models.BaseModel
 import com.example.postcast_reactive_mvp.data.models.PodCastModel
@@ -113,8 +110,16 @@ object PodCastModelImpl : PodCastModel, BaseModel() {
     }
 
     override fun downloadPodcast(context: Context,
-        itemVO: ItemVO) {
-     startDownloading(context = context,itemVO = itemVO)
+        itemVO: ItemVO) : Long{
+     return startDownloading(context = context,itemVO = itemVO)
+    }
+
+    override fun getAllDownload(): LiveData<List<DataVO>> {
+        return mTheDB.downloadDao().getAllDownloadData()
+    }
+
+    override fun saveDownloadItem(dataVO: DataVO) {
+        mTheDB.downloadDao().insertData(dataVO)
     }
 
 }

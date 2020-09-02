@@ -2,13 +2,18 @@ package com.example.postcast_reactive_mvp.fragments
 
 import android.Manifest
 import android.app.DownloadManager
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,6 +44,7 @@ class HomeFragment : BaseFragment(), HomeView {
 
     private var downloadLink: String = ""
     private var mData: ItemVO? = null
+    private var downloadId  :Long = 0
 
     companion object {
         const val REQUEST_CODE = 100
@@ -58,7 +64,20 @@ class HomeFragment : BaseFragment(), HomeView {
 
     private lateinit var mEmptyViewPod: EmptyViewPod
     private lateinit var mMediaPlayerViewPod: MideaPlayerViewPod
-    // private val downloadReceiver = DownloadReceiver()
+
+    private val downloadReceiver = object : BroadcastReceiver(){
+        override fun onReceive(context: Context?, intent: Intent?) {
+            //Fetching the download id received with the broadcast
+            val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID , -1)
+
+            //Checking if the received broadcast is for our enqueued download by matching download id
+            if(downloadId == id){
+                Toast.makeText(context,"download complete", Toast.LENGTH_SHORT).show()
+                Log.d("download complete",mData?.data?.title)
+                mData?.data?.let { mPresenter.saveDownload(it) }
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,6 +106,7 @@ class HomeFragment : BaseFragment(), HomeView {
     }
 
     private fun init() {
+        context?.registerReceiver(downloadReceiver,IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
     }
 
     private fun setUpPresenter() {
@@ -140,7 +160,7 @@ class HomeFragment : BaseFragment(), HomeView {
                 )
             } == PackageManager.PERMISSION_GRANTED -> {
                 context?.let {
-                    mPresenter.download(it, mData!!)
+                    downloadId = mPresenter.download(it, mData!!)
                 }
             }
             else -> {
@@ -173,7 +193,7 @@ class HomeFragment : BaseFragment(), HomeView {
             REQUEST_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     context?.let {
-                        mPresenter.download(it, mData!!)
+                       downloadId = mPresenter.download(it, mData!!)
                     }
                 } else {
                     // explain user
@@ -188,6 +208,9 @@ class HomeFragment : BaseFragment(), HomeView {
 
     override fun onPause() {
         super.onPause()
+        context?.unregisterReceiver(downloadReceiver)
 
     }
+
+
 }
