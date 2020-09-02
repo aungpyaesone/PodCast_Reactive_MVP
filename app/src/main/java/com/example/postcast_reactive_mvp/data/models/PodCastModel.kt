@@ -1,5 +1,7 @@
 package com.example.postcast_reactive_mvp.data.models
 
+import android.app.DownloadManager
+import android.content.Context
 import androidx.lifecycle.LiveData
 import com.example.postcast_reactive_mvp.data.vos.*
 import com.example.postcast_reactive_mvp.network.responses.GetDetailResponse
@@ -24,7 +26,10 @@ interface PodCastModel {
     fun getDetailFromApiSaveToDb(id:String,onSuccess: () -> Unit,onError: (String) -> Unit)
     fun getDetailFromDb(id: String) : LiveData<GetDetailResponse>
 
-    fun getAllCategories(): List<CategoryVO>
+    // Download Manager
+    fun downloadPodcast(context: Context,itemVO: ItemVO)
+
+
 
 
 }

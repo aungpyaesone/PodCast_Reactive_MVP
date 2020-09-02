@@ -1,6 +1,7 @@
 package com.example.postcast_reactive_mvp.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -94,7 +95,7 @@ class SearchFragment : BaseFragment(),SearchView {
     }
 
     override fun showErrorMessage(error: String) {
-        TODO("Not yet implemented")
+       Log.d("error",error)
     }
 
     override fun showLoading() {

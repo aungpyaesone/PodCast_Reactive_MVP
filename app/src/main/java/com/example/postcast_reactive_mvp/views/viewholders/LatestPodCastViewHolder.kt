@@ -1,5 +1,7 @@
 package com.example.postcast_reactive_mvp.views.viewholders
 
+import android.app.DownloadManager
+import android.content.Context.DOWNLOAD_SERVICE
 import android.view.View
 import com.example.postcast_reactive_mvp.data.vos.ItemVO
 import com.example.postcast_reactive_mvp.data.vos.RandomPodcastVO
@@ -24,7 +26,12 @@ class LatestPodCastViewHolder(itemView: View,val mDelegate:LatestEpisodeDelegate
             mData?.let {
                 mDelegate.onTouchLatestEpisode(it)
             }
+        }
 
+        itemView.ivDownload.setOnClickListener {
+            mData?.let {
+                mDelegate.onTouchDownload(it)
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -15,6 +16,11 @@ class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
     override fun onTouchLatestEpisode(itemVO: ItemVO) {
         mView?.navigateToDetailActivity(itemVO.data.data_id)
         Log.d("onTouch","onTouch")
+    }
+
+    override fun onTouchDownload(itemVO: ItemVO) {
+        Log.d("link",itemVO.data.link)
+        mView?.checkPermission(itemVO)
     }
 
     override fun onTapFindSomethingNew() {
@@ -33,6 +39,11 @@ class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
     override fun onTouchThirtySec() {
         Log.d("onTouch","30 Sec")
     }
+
+    override fun download(context: Context, itemVO: ItemVO){
+        mPodcastModel.downloadPodcast(context,itemVO)
+    }
+
 
     override fun onUiReady(lifecycleOwner: LifecycleOwner) {
       //  getDataFromApiSaveToDb()
@@ -66,4 +77,6 @@ class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
            mView?.showErrorMessage(it)
        })
     }
+
+
 }

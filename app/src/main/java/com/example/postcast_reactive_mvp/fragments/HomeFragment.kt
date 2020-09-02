@@ -1,10 +1,15 @@
 package com.example.postcast_reactive_mvp.fragments
 
+import android.Manifest
+import android.app.DownloadManager
+import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.os.Bundle
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,16 +32,33 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
-class HomeFragment : BaseFragment(),HomeView{
+class HomeFragment : BaseFragment(), HomeView {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var mPresenter : HomePresenter
-    private lateinit var mAdapter : LatestPodCastListAdapter
+    private var downloadLink: String = ""
+    private var mData: ItemVO? = null
 
-    private lateinit var mEmptyViewPod : EmptyViewPod
+    companion object {
+        const val REQUEST_CODE = 100
+
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            HomeFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
+    }
+
+    private lateinit var mPresenter: HomePresenter
+    private lateinit var mAdapter: LatestPodCastListAdapter
+
+    private lateinit var mEmptyViewPod: EmptyViewPod
     private lateinit var mMediaPlayerViewPod: MideaPlayerViewPod
+    // private val downloadReceiver = DownloadReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,56 +81,75 @@ class HomeFragment : BaseFragment(),HomeView{
         setUpPresenter()
         setUpViewPod()
         setUpRecycler()
+        init()
         mPresenter.onUiReady(this)
 
     }
 
-    private fun setUpPresenter(){
+    private fun init() {
+    }
+
+    private fun setUpPresenter() {
         mPresenter = ViewModelProviders.of(this).get(HomePresenterImpl::class.java)
         mPresenter.initPresenter(this)
     }
 
-    private fun setUpViewPod(){
+    private fun setUpViewPod() {
         mEmptyViewPod = emptyViewPod as EmptyViewPod
-        mEmptyViewPod.setEmptyData("","")
+        mEmptyViewPod.setEmptyData("", "")
         mEmptyViewPod.setDelegate(mPresenter)
 
         mMediaPlayerViewPod = mediaPlayBack as MideaPlayerViewPod
         mMediaPlayerViewPod.setDelegate(mPresenter)
     }
 
-    private fun setUpRecycler(){
+    private fun setUpRecycler() {
         mAdapter = LatestPodCastListAdapter(mPresenter)
         rvLatest.apply {
-            layoutManager = LinearLayoutManager(activity,RecyclerView.VERTICAL,false)
+            layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             adapter = mAdapter
             setEmptyView(mEmptyViewPod)
         }
     }
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 
     override fun bindRandomPodCast(latestPodCastVORandom: GetRandomPodcastResponse) {
         tvDescription.text = latestPodCastVORandom.description
-        mMediaPlayerViewPod.setData(latestPodCastVORandom.randomPodcast.title,latestPodCastVORandom.audio_length_sec,latestPodCastVORandom.image)
+        mMediaPlayerViewPod.setData(
+            latestPodCastVORandom.randomPodcast.title,
+            latestPodCastVORandom.audio_length_sec,
+            latestPodCastVORandom.image
+        )
     }
 
     override fun navigateToDetailActivity(id: String) {
-        startActivity(activity?.let { PodCastDetailActivity.newIntent(it,id) })
+        startActivity(activity?.let { PodCastDetailActivity.newIntent(it, id) })
     }
 
     override fun bindLatestPodCastList(latestpodCastList: List<ItemVO>) {
         mAdapter.setData(latestpodCastList)
+    }
+
+    override fun checkPermission(itemVO: ItemVO) {
+        mData = itemVO
+        when {
+            context?.let {
+                ContextCompat.checkSelfPermission(
+                    it,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            } == PackageManager.PERMISSION_GRANTED -> {
+                context?.let {
+                    mPresenter.download(it, mData!!)
+                }
+            }
+            else -> {
+                requestPermissions(
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    REQUEST_CODE
+                )
+            }
+        }
     }
 
     override fun showErrorMessage(error: String) {
@@ -119,6 +160,34 @@ class HomeFragment : BaseFragment(),HomeView{
     }
 
     override fun hideLoading() {
+
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    context?.let {
+                        mPresenter.download(it, mData!!)
+                    }
+                } else {
+                    // explain user
+                }
+                return
+            }
+            else -> {
+
+            }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
 
     }
 }

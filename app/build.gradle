@@ -28,8 +28,8 @@ android {
         flavorDimensions "appModule"
         def BASE_URL_FIELD = "BASE_URL_FIELD"
         def BASE_DEV_URL = "\"https://listen-api.listennotes.com/api/v2/\""
-        def BASE_PROD_URL = "\"https://api.themoviedb.org/3/\""
-        def BASE_STAG_URL = "\"https://api.themoviedb.org/3/\""
+        def BASE_PROD_URL = "\"https://listen-api.listennotes.com/api/v2/\""
+        def BASE_STAG_URL = "\"https://listen-api.listennotes.com/api/v2/\""
         dev{
             dimension "appModule"
             applicationIdSuffix = ".dev"

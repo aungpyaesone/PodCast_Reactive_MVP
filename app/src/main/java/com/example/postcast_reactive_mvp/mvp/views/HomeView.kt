@@ -10,4 +10,7 @@ interface HomeView : BaseView {
     fun navigateToDetailActivity(id:String)
 
     fun bindLatestPodCastList(latestpodCastList: List<ItemVO>)
+
+
+    fun checkPermission(itemVO: ItemVO)
 }
