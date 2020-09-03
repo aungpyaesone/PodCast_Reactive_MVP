@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 
@@ -27,8 +28,14 @@ import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.HomePrese
 import com.example.postcast_reactive_mvp.mvp.views.HomeView
 import com.example.postcast_reactive_mvp.network.responses.GetRandomPodcastResponse
 import com.example.postcast_reactive_mvp.views.viewpods.EmptyViewPod
+import com.example.postcast_reactive_mvp.views.viewpods.ExoPlayerViewPod
 import com.example.postcast_reactive_mvp.views.viewpods.MideaPlayerViewPod
 import com.example.shared.fragments.BaseFragment
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.source.MediaSource
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.upstream.DataSource
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import kotlinx.android.synthetic.main.fragment_home.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -45,6 +52,8 @@ class HomeFragment : BaseFragment(), HomeView {
     private var downloadLink: String = ""
     private var mData: ItemVO? = null
     private var downloadId  :Long = 0
+
+    private lateinit var mExoPlayerViewPod : ExoPlayerViewPod
 
     companion object {
         const val REQUEST_CODE = 100
@@ -119,8 +128,8 @@ class HomeFragment : BaseFragment(), HomeView {
         mEmptyViewPod.setEmptyData("", "")
         mEmptyViewPod.setDelegate(mPresenter)
 
-        mMediaPlayerViewPod = mediaPlayBack as MideaPlayerViewPod
-        mMediaPlayerViewPod.setDelegate(mPresenter)
+        mExoPlayerViewPod = player_control_view as ExoPlayerViewPod
+
     }
 
     private fun setUpRecycler() {
@@ -133,15 +142,17 @@ class HomeFragment : BaseFragment(), HomeView {
     }
 
 
+    // bind up next data list
     override fun bindRandomPodCast(latestPodCastVORandom: GetRandomPodcastResponse) {
         tvDescription.text = latestPodCastVORandom.description
-        mMediaPlayerViewPod.setData(
+        mExoPlayerViewPod.setData(
             latestPodCastVORandom.randomPodcast.title,
             latestPodCastVORandom.audio_length_sec,
             latestPodCastVORandom.image
         )
     }
 
+    // navigate detail
     override fun navigateToDetailActivity(id: String) {
         startActivity(activity?.let { PodCastDetailActivity.newIntent(it, id) })
     }
@@ -209,8 +220,17 @@ class HomeFragment : BaseFragment(), HomeView {
     override fun onPause() {
         super.onPause()
         context?.unregisterReceiver(downloadReceiver)
-
+        mExoPlayerViewPod.onPause()
     }
 
+    override fun onResume() {
+        super.onResume()
+        mExoPlayerViewPod.onResume()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mExoPlayerViewPod.onStop()
+    }
 
 }

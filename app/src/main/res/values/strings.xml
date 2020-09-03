@@ -22,4 +22,6 @@
     <string name="search_fragment">Search</string>
     <string name="download_fragment">Download</string>
     <string name="profile_fragment">Profile</string>
+
+    <string name="media_url_mp3">https://chtbl.com/track/24EG4/traffic.libsyn.com/secure/mfceoproject/Ep_55_-_7.10.2020_Pt2.mp3</string>
 </resources>

@@ -10,7 +10,6 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:backgroundTint="@android:color/white">
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -63,9 +62,10 @@
                     android:layout_marginEnd="@dimen/margin_medium"
                     android:background="@drawable/noti_point"
                     />
-                <include
-                    android:id="@+id/mediaPlayBack"
-                    layout="@layout/media_play_back"
+
+                <com.example.postcast_reactive_mvp.views.viewpods.ExoPlayerViewPod
+                    android:id="@+id/player_control_view"
+                    app:controller_layout_id="@layout/custom_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_medium"
@@ -79,7 +79,7 @@
                     app:cardCornerRadius="@dimen/margin_medium_2"
                     app:contentPadding="@dimen/margin_medium_2"
                     app:cardElevation="@dimen/margin_small"
-                    android:layout_below="@id/mediaPlayBack">
+                    android:layout_below="@id/player_control_view">
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">

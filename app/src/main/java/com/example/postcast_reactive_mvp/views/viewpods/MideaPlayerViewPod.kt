@@ -26,7 +26,6 @@ class MideaPlayerViewPod @JvmOverloads constructor(
         ivEpisodeTitle.text = title
         ivPodcast.load(url)
         tvDuration.text = duration.checkTime()
-
     }
 
 
