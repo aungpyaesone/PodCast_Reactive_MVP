@@ -9,10 +9,11 @@ import com.example.postcast_reactive_mvp.data.vos.ItemVO
 
 fun startDownloading(context: Context,itemVO: ItemVO) : Long {
     val downloadId: Long
-    val uri = Uri.parse(itemVO.data.link.split("?").first())
-    val request = DownloadManager.Request(uri).apply {
+   // val uri = Uri.parse(itemVO.data.audio)
+    val request = DownloadManager.Request(Uri.parse(itemVO.data
+        .audio)).apply {
         setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-        setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, uri.lastPathSegment)
+        setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,"${itemVO.data.title.trim().substring(0,8)}.mp3")
         setTitle(itemVO.data.title)
         setAllowedOverMetered(true)
         setAllowedOverRoaming(true)
@@ -22,30 +23,4 @@ fun startDownloading(context: Context,itemVO: ItemVO) : Long {
     return downloadId
     }
 
-    /*var dFinish = false
-    var progress: Int = 0
-    while (!dFinish) {
-        val cursor = dManager.query(DownloadManager.Query().setFilterById(downloadId))
-        if (cursor.moveToFirst()) {
-            val status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS))
-            when (status) {
-                DownloadManager.STATUS_FAILED -> {
-                    dFinish = true
-                }
-                DownloadManager.STATUS_RUNNING -> {
-                    val total =
-                        cursor.getLong(cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES))
-                    if (total > 0) {
-                        val downloaded =
-                            cursor.getLong(cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR))
-                        progress = ((downloaded * 100L) / total).toInt()
-                    }
-                }
-                DownloadManager.STATUS_SUCCESSFUL -> {
-                    progress = 100
-                    dFinish = true
-                }
-            }
-        }
 
-    }*/

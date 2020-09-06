@@ -9,5 +9,6 @@ data class GenreVO(
     @PrimaryKey
     @SerializedName("id")var id: Int,
     @SerializedName("name")var name: String,
-    @SerializedName("parent_id")var parent_id: Int
+    @SerializedName("parent_id")var parent_id: Int,
+    @SerializedName("image_url")var image_url :String
 )

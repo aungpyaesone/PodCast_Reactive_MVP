@@ -2,13 +2,10 @@ package com.example.postcast_reactive_mvp.activities
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.example.postcast_reactive_mvp.R
-import com.example.postcast_reactive_mvp.data.vos.PodcastVO
 import com.example.postcast_reactive_mvp.mvp.presenters.DetailPresenter
 import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.DetailPresenterImpl
 import com.example.postcast_reactive_mvp.mvp.views.DetailView
@@ -40,7 +37,7 @@ class PodCastDetailActivity : BaseActivity(),DetailView {
     }
 
     private fun setupViewPod() {
-        mMediaSmallViewPod = mediaPlayBackSmallViewPod as MediaPlayerSmallViewPod
+        mMediaSmallViewPod = small_control_view as MediaPlayerSmallViewPod
         mMediaSmallViewPod.setDelegate(mPresenter)
     }
 
@@ -53,7 +50,7 @@ class PodCastDetailActivity : BaseActivity(),DetailView {
        ivPoster.load(detailResponse.podcastVO.image)
        podCastTitle.text = detailResponse.title
        tvDescription.text = Html.fromHtml(detailResponse.description)
-        mMediaSmallViewPod.setData(detailResponse.audio_length_sec)
+       mMediaSmallViewPod.setData(detailResponse.link)
     }
 
     override fun showErrorMessage(error: String) {

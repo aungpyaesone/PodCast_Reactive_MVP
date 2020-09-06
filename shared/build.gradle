@@ -36,6 +36,10 @@ dependencies {
     implementation rootProject.ext.libraries.ktx
     implementation rootProject.ext.libraries.constraintLayout
 
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.11.8'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.11.8'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.11.8'
+
     // room
     implementation rootProject.ext.libraries.room
     kapt rootProject.ext.libraries.roomKapt

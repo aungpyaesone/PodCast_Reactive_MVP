@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.downloaed_item_view.view.*
 class DownloadedViewHolder(itemView:View,val mDelegate:DownloadedItemDelegate) : BaseViewHolder<DataVO>(itemView) {
     override fun bindData(data: DataVO) {
         mData = data
-        itemView.categoryTitle.text = data.title
+        itemView.tvCategoryTitle.text = data.title
         itemView.ivPodcast.load(data.image)
         itemView.tvDescription.text = data.description
 

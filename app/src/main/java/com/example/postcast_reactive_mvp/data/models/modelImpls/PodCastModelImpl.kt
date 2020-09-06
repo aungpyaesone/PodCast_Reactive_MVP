@@ -2,7 +2,9 @@ package com.example.postcast_reactive_mvp.data.models.modelImpls
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.postcast_reactive_mvp.data.models.BaseModel
 import com.example.postcast_reactive_mvp.data.models.PodCastModel
 import com.example.postcast_reactive_mvp.data.vos.*
@@ -64,7 +66,7 @@ object PodCastModelImpl : PodCastModel, BaseModel() {
     override fun getPlayListInfoFromApiSaveToDb(onSuccess: () -> Unit, onError: (String) -> Unit) {
         mClientApi.getPodCastPlaylistInfoAndItem(
             API_KEY,
-            "SgTozE1ZAe3"
+            "m1pe7z60bsw"
         )
             .map {
                 it.item.toList()
@@ -116,6 +118,7 @@ object PodCastModelImpl : PodCastModel, BaseModel() {
 
     override fun getAllDownload(): LiveData<List<DataVO>> {
         return mTheDB.downloadDao().getAllDownloadData()
+       // return MutableLiveData<List<DataVO>>()
     }
 
     override fun saveDownloadItem(dataVO: DataVO) {

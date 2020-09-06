@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.postcast_reactive_mvp.data.vos.DataVO
+import io.reactivex.Completable
 
 @Dao
 interface DownloadDao {

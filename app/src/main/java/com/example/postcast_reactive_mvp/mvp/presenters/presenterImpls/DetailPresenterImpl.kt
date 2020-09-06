@@ -10,10 +10,14 @@ import com.example.shared.mvp.presenters.AbstractBasePresenter
 
 class DetailPresenterImpl : DetailPresenter,AbstractBasePresenter<DetailView>() {
     private var mModel = PodCastModelImpl
+    private var mPID:String = ""
 
+    init {
+
+
+    }
     override fun onUiReady(lifecycleOwner: LifecycleOwner, pid: String) {
         requestData(pid)
-
         mModel.getDetailFromDb(pid).observe(
             lifecycleOwner, Observer {
                 it?.let {

@@ -10,9 +10,14 @@ import com.example.postcast_reactive_mvp.data.vos.ItemVO
 import com.example.postcast_reactive_mvp.mvp.presenters.HomePresenter
 import com.example.postcast_reactive_mvp.mvp.views.HomeView
 import com.example.shared.mvp.presenters.AbstractBasePresenter
+import com.google.gson.Gson
 
 class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
     private var mPodcastModel = PodCastModelImpl
+
+    init {
+        getDataFromApiSaveToDb()
+    }
 
     override fun onTouchLatestEpisode(itemVO: ItemVO) {
         mView?.navigateToDetailActivity(itemVO.data.data_id)
@@ -20,7 +25,7 @@ class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
     }
 
     override fun onTouchDownload(itemVO: ItemVO) {
-        Log.d("link",itemVO.data.link)
+        Log.d("link",itemVO.data.audio)
         mView?.checkPermission(itemVO)
     }
 
@@ -67,6 +72,8 @@ class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
             lifecycleOwner, Observer { itemList ->
                 itemList?.let {
                     mView?.bindLatestPodCastList(itemList)
+                   Log.d("gson",Gson().toJson(it))
+
                 }
 
             }

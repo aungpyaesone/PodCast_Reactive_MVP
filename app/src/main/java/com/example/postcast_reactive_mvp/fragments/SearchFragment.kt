@@ -17,6 +17,7 @@ import com.example.postcast_reactive_mvp.mvp.presenters.SearchPresenter
 import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.HomePresenterImpl
 import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.SearchPresenterImpl
 import com.example.postcast_reactive_mvp.mvp.views.SearchView
+import com.example.shared.extensions.load
 import com.example.shared.fragments.BaseFragment
 import kotlinx.android.synthetic.main.fragment_search.*
 
@@ -92,6 +93,8 @@ class SearchFragment : BaseFragment(),SearchView {
 
     override fun bindData(generData: GenreVO) {
         tvTitle.text = generData.name
+        ivEpisode.load(generData.image_url)
+
     }
 
     override fun showErrorMessage(error: String) {
@@ -99,10 +102,10 @@ class SearchFragment : BaseFragment(),SearchView {
     }
 
     override fun showLoading() {
-        TODO("Not yet implemented")
+
     }
 
     override fun hideLoading() {
-        TODO("Not yet implemented")
+
     }
 }

@@ -3,11 +3,13 @@ package com.example.postcast_reactive_mvp.activities
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import com.example.postcast_reactive_mvp.PodCastApp.Companion.simpleExoplayer
 import com.example.postcast_reactive_mvp.R
 import com.example.postcast_reactive_mvp.fragments.DownloadFragment
 import com.example.postcast_reactive_mvp.fragments.HomeFragment
 import com.example.postcast_reactive_mvp.fragments.ProfileFragment
 import com.example.postcast_reactive_mvp.fragments.SearchFragment
+import com.example.postcast_reactive_mvp.views.viewpods.ExoPlayerViewPod
 import com.example.shared.activities.BaseActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -74,4 +76,11 @@ class HomeActivity : BaseActivity() {
       activeFragment = fragment
     //supportFragmentManager.beginTransaction().replace(R.id.container,fragment).commit()
 }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        simpleExoplayer = null
+        simpleExoplayer?.release()
+    }
+
 }

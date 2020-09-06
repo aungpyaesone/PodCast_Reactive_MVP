@@ -68,6 +68,9 @@
                     app:controller_layout_id="@layout/custom_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:rewind_increment="10000"
+                    app:fastforward_increment="30000"
+                    app:show_timeout="0"
                     android:layout_marginTop="@dimen/margin_medium"
                     android:layout_below="@id/ivPodcastLogo"/>
 

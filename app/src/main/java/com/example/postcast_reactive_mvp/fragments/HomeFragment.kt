@@ -9,6 +9,7 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 
 import android.view.LayoutInflater
@@ -72,7 +73,6 @@ class HomeFragment : BaseFragment(), HomeView {
     private lateinit var mAdapter: LatestPodCastListAdapter
 
     private lateinit var mEmptyViewPod: EmptyViewPod
-    private lateinit var mMediaPlayerViewPod: MideaPlayerViewPod
 
     private val downloadReceiver = object : BroadcastReceiver(){
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -144,10 +144,10 @@ class HomeFragment : BaseFragment(), HomeView {
 
     // bind up next data list
     override fun bindRandomPodCast(latestPodCastVORandom: GetRandomPodcastResponse) {
-        tvDescription.text = latestPodCastVORandom.description
+        tvDescription.text = Html.fromHtml(latestPodCastVORandom.description)
         mExoPlayerViewPod.setData(
             latestPodCastVORandom.randomPodcast.title,
-            latestPodCastVORandom.audio_length_sec,
+            latestPodCastVORandom.link,
             latestPodCastVORandom.image
         )
     }
@@ -217,20 +217,9 @@ class HomeFragment : BaseFragment(), HomeView {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onDestroyView() {
+        super.onDestroyView()
         context?.unregisterReceiver(downloadReceiver)
-        mExoPlayerViewPod.onPause()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mExoPlayerViewPod.onResume()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        mExoPlayerViewPod.onStop()
     }
 
 }

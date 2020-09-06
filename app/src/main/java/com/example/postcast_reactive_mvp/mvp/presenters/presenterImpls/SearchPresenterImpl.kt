@@ -10,9 +10,12 @@ import com.example.shared.mvp.presenters.AbstractBasePresenter
 class SearchPresenterImpl : SearchPresenter,AbstractBasePresenter<SearchView>() {
     private val mPodcastModel = PodCastModelImpl
 
+    init {
+        getPodCastGenerFromApiSaveToDb()
+    }
+
     override fun onUiReady(lifecycleOwner: LifecycleOwner) {
 
-        getPodCastGenerFromApiSaveToDb()
         mPodcastModel.getPodcastGenersFromDb().observe(
             lifecycleOwner, Observer {
                 it?.let {

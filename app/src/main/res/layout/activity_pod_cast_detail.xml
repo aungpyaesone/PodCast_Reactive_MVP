@@ -131,10 +131,11 @@
 
     </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
-    <include
-        android:id="@+id/mediaPlayBackSmallViewPod"
-        layout="@layout/media_play_back_small"
+    <com.example.postcast_reactive_mvp.views.viewpods.MediaPlayerSmallViewPod
+        android:id="@+id/small_control_view"
+        app:controller_layout_id="@layout/custom_small_layout"
         android:layout_width="match_parent"
+        app:show_timeout="0"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
