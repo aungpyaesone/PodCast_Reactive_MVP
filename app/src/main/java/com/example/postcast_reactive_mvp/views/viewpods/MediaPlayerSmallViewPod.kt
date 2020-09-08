@@ -3,6 +3,7 @@ package com.example.postcast_reactive_mvp.views.viewpods
 import android.content.Context
 import android.net.Uri
 import android.util.AttributeSet
+import android.util.Log
 import com.example.postcast_reactive_mvp.PodCastApp
 import com.example.postcast_reactive_mvp.PodCastApp.Companion.simpleExoplayer
 import com.example.postcast_reactive_mvp.util.PlaybackStateListener
@@ -22,7 +23,9 @@ class MediaPlayerSmallViewPod @JvmOverloads constructor(
     }
 
     fun setData(playUrl :String){
-        val mediaSource = PodCastApp.buildMediaSource(context, Uri.parse(playUrl))
+        val uri = Uri.parse(playUrl.split("?").first())
+        Log.d("url",playUrl)
+        val mediaSource = PodCastApp.buildMediaSource(context, uri)
         simpleExoplayer?.addListener(playbackStateListener)
         simpleExoplayer?.prepare(mediaSource, false, false)
     }

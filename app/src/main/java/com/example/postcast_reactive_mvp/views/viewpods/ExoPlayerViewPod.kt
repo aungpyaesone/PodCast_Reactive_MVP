@@ -3,6 +3,7 @@ package com.example.postcast_reactive_mvp.views.viewpods
 import android.content.Context
 import android.net.Uri
 import android.util.AttributeSet
+import android.util.Log
 import com.example.postcast_reactive_mvp.PodCastApp.Companion.buildMediaSource
 import com.example.postcast_reactive_mvp.PodCastApp.Companion.simpleExoplayer
 import com.example.postcast_reactive_mvp.util.PlaybackStateListener
@@ -48,7 +49,8 @@ class ExoPlayerViewPod @JvmOverloads constructor(
     fun setData(title:String,playUrl:String,url:String){
         ivEpisodeTitle.text = title
         ivPodcast.load(url)
-        val uri = Uri.parse(playUrl)
+        val uri = Uri.parse(playUrl.split("?").first())
+        Log.d("url",playUrl)
         val mediaSource = buildMediaSource(context,uri)
         simpleExoplayer?.playWhenReady = playWhenReady
         simpleExoplayer?.seekTo(currentWindow, playbackPosition)

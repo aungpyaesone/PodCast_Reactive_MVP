@@ -11,6 +11,7 @@ import com.example.postcast_reactive_mvp.fragments.ProfileFragment
 import com.example.postcast_reactive_mvp.fragments.SearchFragment
 import com.example.postcast_reactive_mvp.views.viewpods.ExoPlayerViewPod
 import com.example.shared.activities.BaseActivity
+import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -27,6 +28,7 @@ class HomeActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
        // callFragment(HomeFragment.newInstance("",""))
+        simpleExoplayer = SimpleExoPlayer.Builder(applicationContext).build()
         setupFragmentManager()
         callFragment(homeFragment)
         setUpBottomNav()

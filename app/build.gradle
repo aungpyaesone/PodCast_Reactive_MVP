@@ -78,9 +78,11 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt rootProject.ext.libraries.roomKapt
 
-    implementation 'com.google.android.exoplayer:exoplayer-core:2.11.8'
-    implementation 'com.google.android.exoplayer:exoplayer-dash:2.11.8'
-    implementation 'com.google.android.exoplayer:exoplayer-ui:2.11.8'
+//    implementation 'com.google.android.exoplayer:exoplayer-core:2.11.8'
+//    implementation 'com.google.android.exoplayer:exoplayer-dash:2.11.8'
+//    implementation 'com.google.android.exoplayer:exoplayer-ui:2.11.8'
+
+    implementation 'com.google.android.exoplayer:exoplayer:2.11.8'
 
     // live data and lifecycle components
     implementation rootProject.ext.libraries.liveData
