@@ -16,9 +16,9 @@ class LatestPodCastViewHolder(itemView: View,val mDelegate:LatestEpisodeDelegate
     override fun bindData(item: ItemVO) {
         mData = item
        // itemView.categoryTitle.text = item.data.title
-        itemView.ivPodcast.load(item.data.image)
-        itemView.tvCategoryTitle.text = item.data.title
-        itemView.tvTime.text = item.data.audio_length_sec.checkTime()
+        item.data?.image?.let { itemView.ivPodcast.load(it) }
+        itemView.tvCategoryTitle.text = item.data?.title
+        itemView.tvTime.text = item.data?.audio_length_sec?.checkTime()
 
     }
     init {

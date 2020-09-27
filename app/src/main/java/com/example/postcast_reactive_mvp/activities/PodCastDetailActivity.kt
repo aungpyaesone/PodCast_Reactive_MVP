@@ -47,10 +47,10 @@ class PodCastDetailActivity : BaseActivity(),DetailView {
     }
 
     override fun showDetail(detailResponse: GetDetailResponse) {
-       ivPoster.load(detailResponse.podcastVO.image)
+       ivPoster.load(detailResponse.podcastVO?.image!!)
        podCastTitle.text = detailResponse.title
        tvDescription.text = Html.fromHtml(detailResponse.description)
-       mMediaSmallViewPod.setData(detailResponse.link)
+        detailResponse.audio?.let { mMediaSmallViewPod.setData(it) }
     }
 
     override fun showErrorMessage(error: String) {

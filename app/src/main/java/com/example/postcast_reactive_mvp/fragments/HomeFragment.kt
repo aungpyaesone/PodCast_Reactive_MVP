@@ -145,11 +145,18 @@ class HomeFragment : BaseFragment(), HomeView {
     // bind up next data list
     override fun bindRandomPodCast(latestPodCastVORandom: GetRandomPodcastResponse) {
         tvDescription.text = Html.fromHtml(latestPodCastVORandom.description)
-        mExoPlayerViewPod.setData(
-            latestPodCastVORandom.randomPodcast.title,
-            latestPodCastVORandom.link,
-            latestPodCastVORandom.image
-        )
+
+        latestPodCastVORandom.audio?.let {link ->
+        latestPodCastVORandom.image?.let { image ->
+        latestPodCastVORandom.title?.let { title ->
+            mExoPlayerViewPod.setData(
+                        title,
+                        link,
+                        image
+                    )
+                }
+            }
+        }
     }
 
     // navigate detail

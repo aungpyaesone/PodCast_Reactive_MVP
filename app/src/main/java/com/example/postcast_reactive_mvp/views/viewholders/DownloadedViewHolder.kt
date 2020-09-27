@@ -13,7 +13,7 @@ class DownloadedViewHolder(itemView:View,val mDelegate:DownloadedItemDelegate) :
     override fun bindData(data: DataVO) {
         mData = data
         itemView.tvCategoryTitle.text = data.title
-        itemView.ivPodcast.load(data.image)
+        data.image?.let { itemView.ivPodcast.load(it) }
         itemView.tvDescription.text = data.description
 
     }

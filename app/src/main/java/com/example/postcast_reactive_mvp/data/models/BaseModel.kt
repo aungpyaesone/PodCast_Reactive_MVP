@@ -15,6 +15,7 @@ abstract class BaseModel{
     protected lateinit var mClientApi : ClientApi
     protected lateinit var mTheDB : PodCastDatabase
 
+
     init {
 
         val interceptor = HttpLoggingInterceptor()

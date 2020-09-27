@@ -11,10 +11,11 @@ fun startDownloading(context: Context,itemVO: ItemVO) : Long {
     val downloadId: Long
    // val uri = Uri.parse(itemVO.data.audio)
     val request = DownloadManager.Request(Uri.parse(itemVO.data
-        .audio)).apply {
+        ?.audio)).apply {
         setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-        setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,"${itemVO.data.title.trim().substring(0,8)}.mp3")
-        setTitle(itemVO.data.title)
+        setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,"${itemVO.data?.title?.trim()
+            ?.substring(0,8)}.mp3")
+        setTitle(itemVO.data?.title)
         setAllowedOverMetered(true)
         setAllowedOverRoaming(true)
     }

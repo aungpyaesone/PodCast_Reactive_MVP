@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "103476462858",
+    "firebase_url": "https://podcastapp-1066a.firebaseio.com",
+    "project_id": "podcastapp-1066a",
+    "storage_bucket": "podcastapp-1066a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103476462858:android:f0f1c6ec9abbe744d1e6f3",
+        "android_client_info": {
+          "package_name": "com.example.postcast_reactive_mvp.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "103476462858-b8f368spdp6aq1tqisu866on4jnh6mkr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-14_N5mYK3y8RHkIUr0k76K6zFoQI0sk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "103476462858-b8f368spdp6aq1tqisu866on4jnh6mkr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

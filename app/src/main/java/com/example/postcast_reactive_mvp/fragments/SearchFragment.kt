@@ -93,7 +93,7 @@ class SearchFragment : BaseFragment(),SearchView {
 
     override fun bindData(generData: GenreVO) {
         tvTitle.text = generData.name
-        ivEpisode.load(generData.image_url)
+        generData.image_url?.let { ivEpisode.load(it) }
 
     }
 

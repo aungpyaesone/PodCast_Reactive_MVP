@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import com.example.postcast_reactive_mvp.data.models.modelImpls.PodCastModelImpl
+import com.example.postcast_reactive_mvp.data.models.modelImpls.PodcastModelFirebaseImpl
 import com.example.postcast_reactive_mvp.data.vos.DataVO
 import com.example.postcast_reactive_mvp.data.vos.ItemVO
 import com.example.postcast_reactive_mvp.mvp.presenters.HomePresenter
@@ -13,19 +13,24 @@ import com.example.shared.mvp.presenters.AbstractBasePresenter
 import com.google.gson.Gson
 
 class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
-    private var mPodcastModel = PodCastModelImpl
+   // private var mPodcastModel = PodCastModelImpl
+    private var mPodcastModel = PodcastModelFirebaseImpl
 
     init {
         getDataFromApiSaveToDb()
     }
 
     override fun onTouchLatestEpisode(itemVO: ItemVO) {
-        mView?.navigateToDetailActivity(itemVO.data.data_id)
-        Log.d("onTouch","onTouch")
+        itemVO.data?.id?.let {
+            Log.d("Dataid",it)
+            mView?.navigateToDetailActivity(it)
+            }
+      //  Log.d("Dataid","null")
+
     }
 
     override fun onTouchDownload(itemVO: ItemVO) {
-        Log.d("link",itemVO.data.audio)
+        Log.d("link",itemVO.data?.audio)
         mView?.checkPermission(itemVO)
     }
 
