@@ -7,8 +7,6 @@ import com.example.postcast_reactive_mvp.data.models.PodCastModel
 import com.example.postcast_reactive_mvp.data.vos.*
 import com.example.postcast_reactive_mvp.network.FirebaseApi
 import com.example.postcast_reactive_mvp.network.FriebaseRealTimeImpl
-import com.example.postcast_reactive_mvp.network.responses.GetDetailResponse
-import com.example.postcast_reactive_mvp.network.responses.GetRandomPodcastResponse
 import com.example.postcast_reactive_mvp.util.startDownloading
 
 object PodcastModelFirebaseImpl : PodCastModel, BaseModel() {

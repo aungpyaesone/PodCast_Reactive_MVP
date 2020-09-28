@@ -7,7 +7,6 @@ import com.example.postcast_reactive_mvp.data.models.modelImpls.PodCastModelImpl
 import com.example.postcast_reactive_mvp.data.models.modelImpls.PodcastModelFirebaseImpl
 import com.google.android.exoplayer2.ExoPlayerLibraryInfo
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.source.hls.HlsMediaSource

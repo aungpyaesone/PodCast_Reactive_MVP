@@ -8,6 +8,5 @@ import com.example.postcast_reactive_mvp.network.responses.GetRandomPodcastRespo
 interface FirebaseApi {
     fun getAllCategories(onSuccess:(genrelist:List<GenreVO>) ->Unit,onFailure :(String) ->Unit)
     fun getEpisodeList(onSuccess: (itemList: List<DataVO>) -> Unit,onFailure: (String) -> Unit)
-    fun getRandomPodcast(onSuccess :(randomPodcast: DataVO)->Unit, onFailure: (String) -> Unit)
-    fun getDetail(id:String,onSuccess:(detail:List<PodcastDetailVO>)->Unit,onFailure: (String) -> Unit)
+
 }
