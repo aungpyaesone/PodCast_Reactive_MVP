@@ -1,7 +1,11 @@
 package com.example.postcast_reactive_mvp.util
 
+import android.util.Log
 import com.example.postcast_reactive_mvp.data.vos.DataVO
 import com.example.postcast_reactive_mvp.data.vos.DownloadVO
+import com.example.postcast_reactive_mvp.data.vos.GenreVO
+import com.example.postcast_reactive_mvp.data.vos.PodcastVO
+import java.util.HashMap
 
 
 fun DataVO.toDownloadVO(): DownloadVO{
@@ -19,4 +23,14 @@ fun DataVO.toDownloadVO(): DownloadVO{
     mDataVO.title = this.title
 
     return mDataVO
+}
+
+
+fun MutableMap<String,Any>?.convertToGenreVO(): GenreVO{
+    val genreVO = GenreVO()
+    genreVO.id = (this?.get("id") as Long).toInt()
+    genreVO.parent_id = (this["parent_id"] as Long).toInt()
+    genreVO.name = this["name"] as String
+
+    return  genreVO
 }

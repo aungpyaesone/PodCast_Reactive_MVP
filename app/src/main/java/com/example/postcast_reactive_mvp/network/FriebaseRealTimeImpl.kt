@@ -63,24 +63,24 @@ object FriebaseRealTimeImpl : FirebaseApi {
         onSuccess: (randomPodcast: DataVO) -> Unit,
         onFailure: (String) -> Unit
     ) {
-        val randomPodcast = Random.nextInt(0..9)
-        db.child("latest_episodes").addValueEventListener(object : ValueEventListener
-        {
-            override fun onCancelled(error: DatabaseError) {
-                onFailure(error.message)
-            }
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val randomList = arrayListOf<DataVO>()
-                snapshot.children.forEach {datasnapshop ->
-                    datasnapshop.getValue(DataVO::class.java)?.let{
-                        it.podcast = datasnapshop.child("podcast").getValue(PodcastVO::class.java)
-                        it.flag = false
-                        randomList.add(it)
-                    }
-                }
-                onSuccess(randomList.get(randomPodcast))
-                }
-        })
+//        val randomPodcast = Random.nextInt(0..9)
+//        db.child("latest_episodes").addValueEventListener(object : ValueEventListener
+//        {
+//            override fun onCancelled(error: DatabaseError) {
+//                onFailure(error.message)
+//            }
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                val randomList = arrayListOf<DataVO>()
+//                snapshot.children.forEach {datasnapshop ->
+//                    datasnapshop.getValue(DataVO::class.java)?.let{
+//                        it.podcast = datasnapshop.child("podcast").getValue(PodcastVO::class.java)
+//                        it.flag = false
+//                        randomList.add(it)
+//                    }
+//                }
+//                onSuccess(randomList.get(randomPodcast))
+//                }
+//        })
 
     }
 
@@ -89,25 +89,25 @@ object FriebaseRealTimeImpl : FirebaseApi {
         onSuccess: (detail: List<PodcastDetailVO>) -> Unit,
         onFailure: (String) -> Unit
     ) {
-        Log.d("id",id)
-        db.child("podcasts").child(id).addValueEventListener(object : ValueEventListener {
-            override fun onCancelled(error: DatabaseError) {
-                onFailure(error.message)
-            }
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val podcastDetailList = arrayListOf<PodcastDetailVO>()
-                snapshot.children.forEach { dataSnapshot ->
-                    dataSnapshot.getValue(PodcastDetailVO::class.java)?.let {
-                        it.extra = dataSnapshot.child("extra").getValue(ExtraVO::class.java)
-                        it.looking_for = dataSnapshot.child("looking_for").getValue(LookingForVO::class.java)
-                        it.genre_ids = dataSnapshot.child("genre_ids").getValue(arrayListOf<Int>()::class.java)
-                        podcastDetailList.add(it)
-                    }
-                }
-                onSuccess(podcastDetailList)
-            }
-
-        })
+//        Log.d("id",id)
+//        db.child("podcasts").child(id).addValueEventListener(object : ValueEventListener {
+//            override fun onCancelled(error: DatabaseError) {
+//                onFailure(error.message)
+//            }
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                val podcastDetailList = arrayListOf<PodcastDetailVO>()
+//                snapshot.children.forEach { dataSnapshot ->
+//                    dataSnapshot.getValue(PodcastDetailVO::class.java)?.let {
+//                        it.extra = dataSnapshot.child("extra").getValue(ExtraVO::class.java)
+//                        it.looking_for = dataSnapshot.child("looking_for").getValue(LookingForVO::class.java)
+//                        it.genre_ids = dataSnapshot.child("genre_ids").getValue(arrayListOf<Int>()::class.java)
+//                        podcastDetailList.add(it)
+//                    }
+//                }
+//                onSuccess(podcastDetailList)
+//            }
+//
+//        })
     }
 
 }

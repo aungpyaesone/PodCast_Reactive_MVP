@@ -27,7 +27,5 @@ data class DataVO(
     @SerializedName("podcast")var podcast: PodcastVO? = null,
     @SerializedName("pub_date_ms")var pub_date_ms: Long? = 0,
     @SerializedName("thumbnail")var thumbnail: String? = "",
-    @SerializedName("title")var title: String? = "",
-    @ColumnInfo(name = "flag",defaultValue = "false")
-    var flag: Boolean = false
+    @SerializedName("title")var title: String? = ""
 )

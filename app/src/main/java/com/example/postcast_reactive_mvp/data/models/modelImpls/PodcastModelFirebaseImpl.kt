@@ -6,25 +6,19 @@ import com.example.postcast_reactive_mvp.data.models.BaseModel
 import com.example.postcast_reactive_mvp.data.models.PodCastModel
 import com.example.postcast_reactive_mvp.data.vos.*
 import com.example.postcast_reactive_mvp.network.FirebaseApi
+import com.example.postcast_reactive_mvp.network.FirebaseFirestoreImpl
 import com.example.postcast_reactive_mvp.network.FriebaseRealTimeImpl
-import com.example.postcast_reactive_mvp.network.responses.GetDetailResponse
-import com.example.postcast_reactive_mvp.network.responses.GetRandomPodcastResponse
 import com.example.postcast_reactive_mvp.util.startDownloading
 
 object PodcastModelFirebaseImpl : PodCastModel, BaseModel() {
-    private val mRealTimeFirebase : FirebaseApi = FriebaseRealTimeImpl
+   // private val mRealTimeFirebase : FirebaseApi = FriebaseRealTimeImpl
+    private val mRealTimeFirebase : FirebaseApi = FirebaseFirestoreImpl
 
     override fun getRandomPodcastEpisodeFromApiSaveToDb(
         onSuccess: (DataVO) -> Unit,
         onError: (String) -> Unit
     ) {
-//       mRealTimeFirebase.getRandomPodcast(onSuccess={
-////           it.podcast?.let { it1 ->
-////               mTheDB.randomPodCastDao().insertPodCast(it1) }
-//           },
-//       onFailure = {
-//           onError(it)
-//       })
+
     }
 
     override fun getRandomPodcastEpisodeFromDb(): LiveData<List<DataVO>> {
