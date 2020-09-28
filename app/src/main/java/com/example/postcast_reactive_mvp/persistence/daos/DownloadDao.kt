@@ -6,14 +6,15 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.postcast_reactive_mvp.data.vos.DataVO
+import com.example.postcast_reactive_mvp.data.vos.DownloadVO
+import com.example.postcast_reactive_mvp.data.vos.PodcastVO
 import io.reactivex.Completable
 
 @Dao
 interface DownloadDao {
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertData(dataVO:DataVO)
+    fun insertData(downloadVO: DownloadVO)
 
-    @Query("select * from podcast_data")
-    fun getAllDownloadData():LiveData<List<DataVO>>
+    @Query("select * from download_list")
+    fun getAllDownloadData():LiveData<List<DownloadVO>>
 }

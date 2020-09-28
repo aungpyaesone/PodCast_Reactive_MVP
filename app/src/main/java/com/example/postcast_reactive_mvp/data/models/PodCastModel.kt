@@ -11,8 +11,8 @@ import com.example.postcast_reactive_mvp.network.responses.GetRandomPodcastRespo
 interface PodCastModel {
 
     // random podcast api
-    fun getRandomPodcastEpisodeFromApiSaveToDb(onSuccess:(GetRandomPodcastResponse)->Unit,onError:(String)->Unit)
-    fun getRandomPodcastEpisodeFromDb(): LiveData<List<GetRandomPodcastResponse>>
+    fun getRandomPodcastEpisodeFromApiSaveToDb(onSuccess:(DataVO)->Unit,onError:(String)->Unit)
+    fun getRandomPodcastEpisodeFromDb(): LiveData<List<DataVO>>
 
     // Podcast with Geners api
     fun getPodcastGenersFromApiSaveToDb(onSuccess: () -> Unit,onError: (String) -> Unit)
@@ -20,20 +20,21 @@ interface PodCastModel {
 
     // PlayList with item
     fun getPlayListInfoFromApiSaveToDb(onSuccess: () -> Unit,onError: (String) -> Unit)
-    fun getPlayListInfoFromDb() : LiveData<List<ItemVO>>
+    // api data is conflict
+    fun getPlayListInfoFromDb() : LiveData<List<DataVO>>
 
     // Detail item
     fun getDetailFromApiSaveToDb(id:String,onSuccess: () -> Unit,onError: (String) -> Unit)
-    fun getDetailFromDb(id: String) : LiveData<GetDetailResponse>
+    fun getDetailFromDb(id: String) : LiveData<DataVO>
 
     // Download Manager
-    fun downloadPodcast(context: Context,itemVO: ItemVO) : Long
+    fun downloadPodcast(context: Context,itemVO: DataVO) : Long
 
     // getDownloadFromDb
-    fun getAllDownload():LiveData<List<DataVO>>
+    fun getAllDownload():LiveData<List<DownloadVO>>
 
     // saveDataVOToDb
-    fun saveDownloadItem(dataVO: DataVO)
+    fun saveDownloadItem(downloadVO: DownloadVO)
 
 
 

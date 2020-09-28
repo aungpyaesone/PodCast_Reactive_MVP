@@ -6,11 +6,15 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.example.postcast_reactive_mvp.data.models.modelImpls.PodcastModelFirebaseImpl
 import com.example.postcast_reactive_mvp.data.vos.DataVO
+import com.example.postcast_reactive_mvp.data.vos.DownloadVO
 import com.example.postcast_reactive_mvp.data.vos.ItemVO
+import com.example.postcast_reactive_mvp.data.vos.PodcastVO
 import com.example.postcast_reactive_mvp.mvp.presenters.HomePresenter
 import com.example.postcast_reactive_mvp.mvp.views.HomeView
 import com.example.shared.mvp.presenters.AbstractBasePresenter
 import com.google.gson.Gson
+import kotlin.random.Random
+import kotlin.random.nextInt
 
 class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
    // private var mPodcastModel = PodCastModelImpl
@@ -20,8 +24,8 @@ class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
         getDataFromApiSaveToDb()
     }
 
-    override fun onTouchLatestEpisode(itemVO: ItemVO) {
-        itemVO.data?.id?.let {
+    override fun onTouchLatestEpisode(itemVO: DataVO) {
+        itemVO.id?.let {
             Log.d("Dataid",it)
             mView?.navigateToDetailActivity(it)
             }
@@ -29,8 +33,8 @@ class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
 
     }
 
-    override fun onTouchDownload(itemVO: ItemVO) {
-        Log.d("link",itemVO.data?.audio)
+    override fun onTouchDownload(itemVO: DataVO) {
+        Log.d("link",itemVO.audio)
         mView?.checkPermission(itemVO)
     }
 
@@ -51,12 +55,12 @@ class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
         Log.d("onTouch","30 Sec")
     }
 
-    override fun download(context: Context, itemVO: ItemVO):Long{
+    override fun download(context: Context, itemVO: DataVO):Long{
        return mPodcastModel.downloadPodcast(context,itemVO)
     }
 
-    override fun saveDownload(dataVO: DataVO) {
-        mPodcastModel.saveDownloadItem(dataVO)
+    override fun saveDownload(downloadVO: DownloadVO) {
+        mPodcastModel.saveDownloadItem(downloadVO)
     }
 
 
@@ -65,8 +69,9 @@ class HomePresenterImpl : HomePresenter,AbstractBasePresenter<HomeView>() {
         mPodcastModel.getRandomPodcastEpisodeFromDb().observe(
             lifecycleOwner, Observer {
                 it?.let {data ->
+                    val random = Random.nextInt(0..data.size)
                     if ( data.isNotEmpty()){
-                        mView?.bindRandomPodCast(data.last())
+                        mView?.bindRandomPodCast(data[random])
                     }
 
                 }

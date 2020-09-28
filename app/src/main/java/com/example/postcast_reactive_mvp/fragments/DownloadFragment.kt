@@ -11,6 +11,8 @@ import com.example.postcast_reactive_mvp.R
 import com.example.postcast_reactive_mvp.activities.PodCastDetailActivity
 import com.example.postcast_reactive_mvp.adapters.DownloadedListAdapter
 import com.example.postcast_reactive_mvp.data.vos.DataVO
+import com.example.postcast_reactive_mvp.data.vos.DownloadVO
+import com.example.postcast_reactive_mvp.data.vos.PodcastVO
 import com.example.postcast_reactive_mvp.mvp.presenters.DownloadedPresenter
 import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.DownloadedPresenterImpl
 import com.example.postcast_reactive_mvp.mvp.views.DownloadedView
@@ -94,8 +96,8 @@ class DownloadFragment : BaseFragment(),DownloadedView {
         startActivity(activity?.let { PodCastDetailActivity.newIntent(it,id) })
     }
 
-    override fun showDownloadList(dataVO: List<DataVO>) {
-        mAdapter.setData(dataVO)
+    override fun showDownloadList(downloadList: List<DownloadVO>) {
+        mAdapter.setData(downloadList)
     }
 
     override fun showErrorMessage(error: String) {

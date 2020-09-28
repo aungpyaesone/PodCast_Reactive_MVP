@@ -5,17 +5,17 @@ import android.content.Context
 import android.net.Uri
 import android.os.Environment
 import android.util.Log
+import com.example.postcast_reactive_mvp.data.vos.DataVO
 import com.example.postcast_reactive_mvp.data.vos.ItemVO
 
-fun startDownloading(context: Context,itemVO: ItemVO) : Long {
+fun startDownloading(context: Context,itemVO: DataVO) : Long {
     val downloadId: Long
    // val uri = Uri.parse(itemVO.data.audio)
-    val request = DownloadManager.Request(Uri.parse(itemVO.data
-        ?.audio)).apply {
+    val request = DownloadManager.Request(Uri.parse(itemVO.audio)).apply {
         setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-        setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,"${itemVO.data?.title?.trim()
+        setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,"${itemVO.title?.trim()
             ?.substring(0,8)}.mp3")
-        setTitle(itemVO.data?.title)
+        setTitle(itemVO.title)
         setAllowedOverMetered(true)
         setAllowedOverRoaming(true)
     }

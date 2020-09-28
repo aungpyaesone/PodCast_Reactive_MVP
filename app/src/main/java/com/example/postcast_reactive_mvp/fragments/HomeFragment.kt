@@ -23,11 +23,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.postcast_reactive_mvp.R
 import com.example.postcast_reactive_mvp.activities.PodCastDetailActivity
 import com.example.postcast_reactive_mvp.adapters.LatestPodCastListAdapter
+import com.example.postcast_reactive_mvp.data.vos.DataVO
+import com.example.postcast_reactive_mvp.data.vos.DownloadVO
 import com.example.postcast_reactive_mvp.data.vos.ItemVO
+import com.example.postcast_reactive_mvp.data.vos.PodcastVO
 import com.example.postcast_reactive_mvp.mvp.presenters.HomePresenter
 import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.HomePresenterImpl
 import com.example.postcast_reactive_mvp.mvp.views.HomeView
 import com.example.postcast_reactive_mvp.network.responses.GetRandomPodcastResponse
+import com.example.postcast_reactive_mvp.util.toDownloadVO
 import com.example.postcast_reactive_mvp.views.viewpods.EmptyViewPod
 import com.example.postcast_reactive_mvp.views.viewpods.ExoPlayerViewPod
 import com.example.postcast_reactive_mvp.views.viewpods.MideaPlayerViewPod
@@ -51,7 +55,7 @@ class HomeFragment : BaseFragment(), HomeView {
     private var param2: String? = null
 
     private var downloadLink: String = ""
-    private var mData: ItemVO? = null
+    private var mData: DataVO? = null
     private var downloadId  :Long = 0
 
     private lateinit var mExoPlayerViewPod : ExoPlayerViewPod
@@ -82,8 +86,10 @@ class HomeFragment : BaseFragment(), HomeView {
             //Checking if the received broadcast is for our enqueued download by matching download id
             if(downloadId == id){
                 Toast.makeText(context,"download complete", Toast.LENGTH_SHORT).show()
-                Log.d("download complete",mData?.data?.title)
-                mData?.data?.let { mPresenter.saveDownload(it) }
+               mData?.let {
+
+                   mPresenter.saveDownload(it.toDownloadVO())
+               }
             }
         }
     }
@@ -143,7 +149,7 @@ class HomeFragment : BaseFragment(), HomeView {
 
 
     // bind up next data list
-    override fun bindRandomPodCast(latestPodCastVORandom: GetRandomPodcastResponse) {
+    override fun bindRandomPodCast(latestPodCastVORandom: DataVO) {
         tvDescription.text = Html.fromHtml(latestPodCastVORandom.description)
 
         latestPodCastVORandom.audio?.let {link ->
@@ -164,11 +170,11 @@ class HomeFragment : BaseFragment(), HomeView {
         startActivity(activity?.let { PodCastDetailActivity.newIntent(it, id) })
     }
 
-    override fun bindLatestPodCastList(latestpodCastList: List<ItemVO>) {
+    override fun bindLatestPodCastList(latestpodCastList: List<DataVO>) {
         mAdapter.setData(latestpodCastList)
     }
 
-    override fun checkPermission(itemVO: ItemVO) {
+    override fun checkPermission(itemVO: DataVO) {
         mData = itemVO
         when {
             context?.let {

@@ -10,6 +10,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlin.random.Random
+import kotlin.random.nextInt
 
 object FriebaseRealTimeImpl : FirebaseApi {
 
@@ -18,7 +20,7 @@ object FriebaseRealTimeImpl : FirebaseApi {
         onSuccess: (genrelist: List<GenreVO>) -> Unit,
         onFailure: (String) -> Unit
     ) {
-        db.child("categories").addValueEventListener(object : ValueEventListener {
+        db.child("genres").addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 onFailure(error.message)
             }
@@ -36,23 +38,21 @@ object FriebaseRealTimeImpl : FirebaseApi {
     }
 
     override fun getEpisodeList(
-        onSuccess: (itemList: List<ItemVO>) -> Unit,
+        onSuccess: (itemList: List<DataVO>) -> Unit,
         onFailure: (String) -> Unit
     ) {
-        db.child("playlists").addValueEventListener(object : ValueEventListener {
+        db.child("latest_episodes").addValueEventListener(object : ValueEventListener
+        {
             override fun onCancelled(error: DatabaseError) {
                 onFailure(error.message)
             }
             override fun onDataChange(snapshot: DataSnapshot) {
-                val itemList = arrayListOf<ItemVO>()
-                for(dataSnapshot: DataSnapshot in snapshot.children){
-                        val itemVO = ItemVO()
-                        itemVO.id = dataSnapshot.child("id").getValue(Long::class.java)?.toInt()!!
-                        itemVO.added_at_ms = dataSnapshot.child("added_at_ms").getValue(Long::class.java)
-                        itemVO.notes = dataSnapshot.child("notes").getValue(String::class.java)
-                        itemVO.type = dataSnapshot.child("type").getValue(String::class.java)
-                        itemVO.data = dataSnapshot.child("data").getValue(DataVO::class.java)
-                        itemList.add(itemVO)
+                val itemList = arrayListOf<DataVO>()
+                snapshot.children.forEach{dataSnapshot ->
+                    dataSnapshot.getValue(DataVO::class.java)?.let{
+                        it.podcast = dataSnapshot.child("podcast").getValue(PodcastVO::class.java)
+                        itemList.add(it)
+                    }
                 }
                 onSuccess(itemList)
             }
@@ -60,26 +60,25 @@ object FriebaseRealTimeImpl : FirebaseApi {
     }
 
     override fun getRandomPodcast(
-        onSuccess: (randomPodcast: GetRandomPodcastResponse) -> Unit,
+        onSuccess: (randomPodcast: DataVO) -> Unit,
         onFailure: (String) -> Unit
     ) {
-        db.child("random_podcast").addValueEventListener(object : ValueEventListener
+        val randomPodcast = Random.nextInt(0..9)
+        db.child("latest_episodes").addValueEventListener(object : ValueEventListener
         {
             override fun onCancelled(error: DatabaseError) {
                 onFailure(error.message)
             }
             override fun onDataChange(snapshot: DataSnapshot) {
-                val randomPodcast = GetRandomPodcastResponse()
-                for (dataSnapShot in snapshot.getChildren())  //--> At this point, ds is an iterator of dataSnapshot; it will iterate the dataSnapshot's children. In this case, the first child's type is String, thus the first iteration of ds will have a type of String.
-                {
-                    randomPodcast.id = dataSnapShot.child("id").getValue(String::class.java)!!
-                    randomPodcast.audio = dataSnapShot.child("audio").getValue(String::class.java)
-                    randomPodcast.image = dataSnapShot.child("thumbnail").getValue(String::class.java)
-                    randomPodcast.title = dataSnapShot.child("title").getValue(String::class.java)
-                    randomPodcast.description =
-                    dataSnapShot.child("description").getValue(String::class.java)
+                val randomList = arrayListOf<DataVO>()
+                snapshot.children.forEach {datasnapshop ->
+                    datasnapshop.getValue(DataVO::class.java)?.let{
+                        it.podcast = datasnapshop.child("podcast").getValue(PodcastVO::class.java)
+                        it.flag = false
+                        randomList.add(it)
+                    }
                 }
-                onSuccess(randomPodcast)
+                onSuccess(randomList.get(randomPodcast))
                 }
         })
 
@@ -87,36 +86,27 @@ object FriebaseRealTimeImpl : FirebaseApi {
 
     override fun getDetail(
         id: String,
-        onSuccess: (detail: GetDetailResponse) -> Unit,
+        onSuccess: (detail: List<PodcastDetailVO>) -> Unit,
         onFailure: (String) -> Unit
     ) {
         Log.d("id",id)
-        db.child("details").child(id).addValueEventListener(object : ValueEventListener {
+        db.child("podcasts").child(id).addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 onFailure(error.message)
             }
             override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.children.forEach{dataSnapshot ->
-
-                        // itemList.add(it)
-                        val detail = GetDetailResponse()
-                        detail.audio = dataSnapshot.child("audio").getValue(String::class.java)
-                        detail.id = dataSnapshot.child("id").getValue(String::class.java)!!
-                        detail.audio_length_sec = dataSnapshot.child("audio_length_sec").getValue(Long::class.java)?.toInt()
-                        detail.description = dataSnapshot.child("description").getValue(String::class.java)
-                        detail.image = dataSnapshot.child("image").getValue(String::class.java)
-                        detail.link = dataSnapshot.child("link").getValue(String::class.java)
-                        detail.listennotes_edit_url = dataSnapshot.child("listennotes_edit_url").getValue(
-                        String::class.java)
-                        detail.podcastVO = dataSnapshot.child("podcast").getValue(PodcastVO::class.java)
-                        detail.thumbnail = dataSnapshot.child("thumbnail").getValue(String::class.java)
-                        detail.title = dataSnapshot.child("title").getValue(String::class.java)
-
-                        onSuccess(detail)
-
+                val podcastDetailList = arrayListOf<PodcastDetailVO>()
+                snapshot.children.forEach { dataSnapshot ->
+                    dataSnapshot.getValue(PodcastDetailVO::class.java)?.let {
+                        it.extra = dataSnapshot.child("extra").getValue(ExtraVO::class.java)
+                        it.looking_for = dataSnapshot.child("looking_for").getValue(LookingForVO::class.java)
+                        it.genre_ids = dataSnapshot.child("genre_ids").getValue(arrayListOf<Int>()::class.java)
+                        podcastDetailList.add(it)
+                    }
                 }
-
+                onSuccess(podcastDetailList)
             }
+
         })
     }
 

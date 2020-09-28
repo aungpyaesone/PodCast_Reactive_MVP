@@ -19,7 +19,7 @@ class DetailPresenterImpl : DetailPresenter,AbstractBasePresenter<DetailView>() 
 
     }
     override fun onUiReady(lifecycleOwner: LifecycleOwner, pid: String) {
-        requestData(pid)
+       // requestData(pid)
         mModel.getDetailFromDb(pid).observe(
             lifecycleOwner, Observer {
                 it?.let {
@@ -44,7 +44,6 @@ class DetailPresenterImpl : DetailPresenter,AbstractBasePresenter<DetailView>() 
     private fun requestData(pid:String){
 
         mModel.getDetailFromApiSaveToDb(pid,{},{
-
             mView?.showErrorMessage(it)
         })
     }

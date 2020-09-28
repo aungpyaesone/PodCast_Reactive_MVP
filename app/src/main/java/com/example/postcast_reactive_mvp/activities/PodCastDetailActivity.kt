@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Html
 import androidx.lifecycle.ViewModelProviders
 import com.example.postcast_reactive_mvp.R
+import com.example.postcast_reactive_mvp.data.vos.DataVO
 import com.example.postcast_reactive_mvp.mvp.presenters.DetailPresenter
 import com.example.postcast_reactive_mvp.mvp.presenters.presenterImpls.DetailPresenterImpl
 import com.example.postcast_reactive_mvp.mvp.views.DetailView
@@ -46,11 +47,11 @@ class PodCastDetailActivity : BaseActivity(),DetailView {
         mPresenter.initPresenter(this)
     }
 
-    override fun showDetail(detailResponse: GetDetailResponse) {
-       ivPoster.load(detailResponse.podcastVO?.image!!)
+    override fun showDetail(detailResponse: DataVO) {
+       ivPoster.load(detailResponse.image!!)
        podCastTitle.text = detailResponse.title
        tvDescription.text = Html.fromHtml(detailResponse.description)
-        detailResponse.audio?.let { mMediaSmallViewPod.setData(it) }
+       detailResponse.audio?.let { mMediaSmallViewPod.setData(it) }
     }
 
     override fun showErrorMessage(error: String) {

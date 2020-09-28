@@ -4,9 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import com.example.postcast_reactive_mvp.data.models.BaseModel
 import com.example.postcast_reactive_mvp.data.models.PodCastModel
-import com.example.postcast_reactive_mvp.data.vos.DataVO
-import com.example.postcast_reactive_mvp.data.vos.GenreVO
-import com.example.postcast_reactive_mvp.data.vos.ItemVO
+import com.example.postcast_reactive_mvp.data.vos.*
 import com.example.postcast_reactive_mvp.network.FirebaseApi
 import com.example.postcast_reactive_mvp.network.FriebaseRealTimeImpl
 import com.example.postcast_reactive_mvp.network.responses.GetDetailResponse
@@ -17,19 +15,20 @@ object PodcastModelFirebaseImpl : PodCastModel, BaseModel() {
     private val mRealTimeFirebase : FirebaseApi = FriebaseRealTimeImpl
 
     override fun getRandomPodcastEpisodeFromApiSaveToDb(
-        onSuccess: (GetRandomPodcastResponse) -> Unit,
+        onSuccess: (DataVO) -> Unit,
         onError: (String) -> Unit
     ) {
-       mRealTimeFirebase.getRandomPodcast(onSuccess={
-           mTheDB.randomPodCastDao().insertPodCast(it)
-       },
-       onFailure = {
-           onError(it)
-       })
+//       mRealTimeFirebase.getRandomPodcast(onSuccess={
+////           it.podcast?.let { it1 ->
+////               mTheDB.randomPodCastDao().insertPodCast(it1) }
+//           },
+//       onFailure = {
+//           onError(it)
+//       })
     }
 
-    override fun getRandomPodcastEpisodeFromDb(): LiveData<List<GetRandomPodcastResponse>> {
-            return mTheDB.randomPodCastDao().getAllPodCast()
+    override fun getRandomPodcastEpisodeFromDb(): LiveData<List<DataVO>> {
+            return mTheDB.playlistDao().getAllPlayList()
     }
 
     override fun getPodcastGenersFromApiSaveToDb(onSuccess: () -> Unit, onError: (String) -> Unit) {
@@ -53,7 +52,7 @@ object PodcastModelFirebaseImpl : PodCastModel, BaseModel() {
         })
     }
 
-    override fun getPlayListInfoFromDb(): LiveData<List<ItemVO>> {
+    override fun getPlayListInfoFromDb(): LiveData<List<DataVO>> {
        return mTheDB.playlistDao().getAllPlayList()
     }
 
@@ -62,26 +61,22 @@ object PodcastModelFirebaseImpl : PodCastModel, BaseModel() {
         onSuccess: () -> Unit,
         onError: (String) -> Unit
     ) {
-        mRealTimeFirebase.getDetail(id,onSuccess = {
-            mTheDB.detailDao().insertDetail(it)
-        },onFailure = {
-            onError(it)
-        })
+
     }
 
-    override fun getDetailFromDb(id: String): LiveData<GetDetailResponse> {
+    override fun getDetailFromDb(id: String): LiveData<DataVO> {
        return mTheDB.detailDao().getDetailById(id)
     }
 
-    override fun downloadPodcast(context: Context, itemVO: ItemVO): Long {
+    override fun downloadPodcast(context: Context, itemVO: DataVO): Long {
         return startDownloading(context = context,itemVO = itemVO)
     }
 
-    override fun getAllDownload(): LiveData<List<DataVO>> {
+    override fun getAllDownload(): LiveData<List<DownloadVO>> {
         return mTheDB.downloadDao().getAllDownloadData()
     }
 
-    override fun saveDownloadItem(dataVO: DataVO) {
-        mTheDB.downloadDao().insertData(dataVO)
+    override fun saveDownloadItem(downloadVO: DownloadVO) {
+        mTheDB.downloadDao().insertData(downloadVO)
     }
 }

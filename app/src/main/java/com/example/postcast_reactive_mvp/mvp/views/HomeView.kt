@@ -1,16 +1,17 @@
 package com.example.postcast_reactive_mvp.mvp.views
 
+import com.example.postcast_reactive_mvp.data.vos.DataVO
 import com.example.postcast_reactive_mvp.data.vos.ItemVO
 import com.example.postcast_reactive_mvp.data.vos.PodcastVO
 import com.example.postcast_reactive_mvp.network.responses.GetRandomPodcastResponse
 import com.example.shared.mvp.views.BaseView
 
 interface HomeView : BaseView {
-    fun bindRandomPodCast(latestPodCastVORandom: GetRandomPodcastResponse)
+    fun bindRandomPodCast(latestPodCastVORandom: DataVO)
     fun navigateToDetailActivity(id:String)
 
-    fun bindLatestPodCastList(latestpodCastList: List<ItemVO>)
+    fun bindLatestPodCastList(latestpodCastList: List<DataVO>)
 
 
-    fun checkPermission(itemVO: ItemVO)
+    fun checkPermission(itemVO: DataVO)
 }

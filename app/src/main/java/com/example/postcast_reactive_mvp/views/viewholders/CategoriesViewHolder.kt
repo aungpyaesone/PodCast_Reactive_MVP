@@ -10,6 +10,6 @@ class CategoriesViewHolder(itemView:View) : BaseViewHolder<GenreVO>(itemView) {
     override fun bindData(gener: GenreVO) {
         mData = gener
         itemView.categoryTitle.text = gener.name
-        gener.image_url?.let { itemView.ivPodcast.load(it) }
+       // gener.image_url?.let { itemView.ivPodcast.load(it) }
     }
 }

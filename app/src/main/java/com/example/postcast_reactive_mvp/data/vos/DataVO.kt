@@ -1,5 +1,6 @@
 package com.example.postcast_reactive_mvp.data.vos
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
@@ -7,13 +8,13 @@ import com.example.postcast_reactive_mvp.persistence.PodCastConverter
 import com.google.firebase.database.IgnoreExtraProperties
 import com.google.gson.annotations.SerializedName
 @IgnoreExtraProperties
-@Entity(tableName = "podcast_data")
+@Entity(tableName = "podcast_data_list")
 @TypeConverters(PodCastConverter::class)
 data class DataVO(
-    @SerializedName("audio")var audio: String = "",
+    @SerializedName("audio")var audio: String? = "",
     @SerializedName("audio_length_sec")var audio_length_sec: Int? = 0,
     @SerializedName("description")var description: String? = "",
-   // @SerializedName("explicit_content")var explicit_content: Boolean? = true,
+    @SerializedName("explicit_content")var explicit_content: Boolean? = true,
 
     @PrimaryKey
     @SerializedName("id")var id: String = "",
@@ -23,8 +24,10 @@ data class DataVO(
     @SerializedName("listennotes_url")var listennotes_url: String? = "",
     @SerializedName("maybe_audio_invarid")var maybe_audio_invarid: Boolean? = true,
 
-  //  @SerializedName("podcast")var podcast: PodcastVO? = null,
+    @SerializedName("podcast")var podcast: PodcastVO? = null,
     @SerializedName("pub_date_ms")var pub_date_ms: Long? = 0,
     @SerializedName("thumbnail")var thumbnail: String? = "",
-    @SerializedName("title")var title: String? = ""
+    @SerializedName("title")var title: String? = "",
+    @ColumnInfo(name = "flag",defaultValue = "false")
+    var flag: Boolean = false
 )

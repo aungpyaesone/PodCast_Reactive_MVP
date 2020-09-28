@@ -11,8 +11,8 @@ import com.example.postcast_reactive_mvp.persistence.daos.*
 
 @Database(entities = [GetRandomPodcastResponse::class,GenreVO::class,
     GetDetailResponse::class,ItemVO::class,PodcastVO::class,
-    DataVO::class
-],version =2,exportSchema = false)
+    DataVO::class,DownloadVO::class
+],version =5,exportSchema = false)
 abstract class PodCastDatabase : RoomDatabase() {
     companion object {
         val DB_NAME = "POD_CAST_DB"
